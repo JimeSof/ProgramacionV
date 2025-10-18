@@ -7,15 +7,15 @@
       "RelativeMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|solutionrelative:pages\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|c:\\users\\jimena valverde\\onedrive - castrocarazo\\documentos\\github\\programacionv\\proyectogrupo6\\site.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\site.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|solutionrelative:site.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|c:\\users\\jimena valverde\\onedrive - castrocarazo\\documentos\\github\\programacionv\\proyectogrupo6\\content\\estilos.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "AbsoluteMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\content\\estilos.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|solutionrelative:content\\estilos.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|c:\\users\\jimena valverde\\onedrive - castrocarazo\\documentos\\github\\programacionv\\proyectogrupo6\\pages\\gestionarreservaciones.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "AbsoluteMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\pages\\gestionarreservaciones.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|solutionrelative:pages\\gestionarreservaciones.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
@@ -40,11 +40,15 @@
               "RelativeDocumentMoniker": "Pages\\Login.html",
               "ToolTip": "C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\Pages\\Login.html",
               "RelativeToolTip": "Pages\\Login.html",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAACUAAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2025-10-16T00:28:33.272Z",
               "IsPinned": true,
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
@@ -56,12 +60,7 @@
               "RelativeToolTip": "Site.Master.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T02:12:50.491Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "WhenOpened": "2025-10-16T02:12:50.491Z"
             },
             {
               "$type": "Document",
@@ -73,8 +72,7 @@
               "RelativeToolTip": "Content\\Estilos.css",
               "ViewState": "AgIAACcAAAAAAAAAAAAAAC8AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-16T00:41:47.545Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-16T00:41:47.545Z"
             },
             {
               "$type": "Document",
@@ -86,8 +84,7 @@
               "RelativeToolTip": "Pages\\GestionarReservaciones.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2025-10-15T23:23:10.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-15T23:23:10.938Z"
             },
             {
               "$type": "Document",
