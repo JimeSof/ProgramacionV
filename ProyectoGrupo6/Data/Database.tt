@@ -117,7 +117,6 @@
 	// to configure GetSchemaOptions properties, add them here, before load metadata call
 
 //	LoadSqlServerMetadata("MyServer", "MyDatabase", "User", "Password");
-
 	LoadSqlServerMetadata("DESKTOP-RRP2641\\SQLEXPRESS", "PV_ProyectoFinal"); // Integrated Security
 //	LoadSqlServerMetadata(string connectionString);
 

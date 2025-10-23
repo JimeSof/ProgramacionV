@@ -256,7 +256,6 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Estilos.css" />
-    <Content Include="Content\Site.css" />
     <Content Include="DATA\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database1.generated.cs</LastGenOutput>
@@ -264,10 +263,11 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Imagen\background.jpg" />
     <Content Include="LinqToDB.Templates\CopyMe.SqlServer.tt.txt" />
     <Content Include="Pages\Gestionar Habitaciones.aspx" />
     <Content Include="Pages\GestionarReservaciones.aspx" />
-    <Content Include="Pages\Login.html" />
+    <Content Include="Pages\Login.aspx" />
     <Content Include="Pages\MisReservaciones.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -392,6 +392,13 @@
     </Compile>
     <Compile Include="Pages\GestionarReservaciones.aspx.designer.cs">
       <DependentUpon>GestionarReservaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\MisReservaciones.aspx.cs">
       <DependentUpon>MisReservaciones.aspx</DependentUpon>

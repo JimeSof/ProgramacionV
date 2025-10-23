@@ -279,41 +279,43 @@ namespace DataModels
 
 		#region SpLOGIN
 
-		public static int SpLOGIN(this PvProyectoFinalDB dataConnection, string @nombreCompleto, string @email, string @clave, ref int? @idPersona, ref bool? @esEmpleado, ref int? @acceso)
+		public static int SpLOGIN(this PvProyectoFinalDB dataConnection, string @email, string @clave, ref int? @idPersona, ref bool? @esEmpleado, ref int? @acceso, ref string @nombreCompleto)
 		{
 			var parameters = new []
 			{
-				new DataParameter("@nombreCompleto", @nombreCompleto, LinqToDB.DataType.VarChar)
-				{
-					Size = 250
-				},
-				new DataParameter("@email",      @email,      LinqToDB.DataType.VarChar)
+				new DataParameter("@email",          @email,          LinqToDB.DataType.VarChar)
 				{
 					Size = 150
 				},
-				new DataParameter("@clave",      @clave,      LinqToDB.DataType.VarChar)
+				new DataParameter("@clave",          @clave,          LinqToDB.DataType.VarChar)
 				{
 					Size = 15
 				},
-				new DataParameter("@idPersona",  @idPersona,  LinqToDB.DataType.Int32)
+				new DataParameter("@idPersona",      @idPersona,      LinqToDB.DataType.Int32)
 				{
 					Direction = ParameterDirection.InputOutput
 				},
-				new DataParameter("@esEmpleado", @esEmpleado, LinqToDB.DataType.Boolean)
+				new DataParameter("@esEmpleado",     @esEmpleado,     LinqToDB.DataType.Boolean)
 				{
 					Direction = ParameterDirection.InputOutput
 				},
-				new DataParameter("@acceso",     @acceso,     LinqToDB.DataType.Int32)
+				new DataParameter("@acceso",         @acceso,         LinqToDB.DataType.Int32)
 				{
 					Direction = ParameterDirection.InputOutput
+				},
+				new DataParameter("@nombreCompleto", @nombreCompleto, LinqToDB.DataType.VarChar)
+				{
+					Direction = ParameterDirection.InputOutput,
+					Size      = 250
 				}
 			};
 
 			var ret = dataConnection.ExecuteProc("[dbo].[spLOGIN]", parameters);
 
-			@idPersona  = Converter.ChangeTypeTo<int?> (parameters[3].Value);
-			@esEmpleado = Converter.ChangeTypeTo<bool?>(parameters[4].Value);
-			@acceso     = Converter.ChangeTypeTo<int?> (parameters[5].Value);
+			@idPersona      = Converter.ChangeTypeTo<int?>  (parameters[2].Value);
+			@esEmpleado     = Converter.ChangeTypeTo<bool?> (parameters[3].Value);
+			@acceso         = Converter.ChangeTypeTo<int?>  (parameters[4].Value);
+			@nombreCompleto = Converter.ChangeTypeTo<string>(parameters[5].Value);
 
 			return ret;
 		}
