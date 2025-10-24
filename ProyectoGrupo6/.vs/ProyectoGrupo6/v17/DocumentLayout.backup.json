@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|c:\\users\\jimena valverde\\onedrive - castrocarazo\\documentos\\github\\programacionv\\proyectogrupo6\\pages\\gestionarreservaciones.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|solutionrelative:pages\\gestionarreservaciones.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|c:\\users\\jimena valverde\\onedrive - castrocarazo\\documentos\\github\\programacionv\\proyectogrupo6\\site.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|solutionrelative:site.master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|c:\\users\\jimena valverde\\onedrive - castrocarazo\\documentos\\github\\programacionv\\proyectogrupo6\\pages\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|solutionrelative:pages\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|c:\\users\\jimena valverde\\onedrive - castrocarazo\\documentos\\github\\programacionv\\proyectogrupo6\\content\\estilos.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|solutionrelative:content\\estilos.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\pages\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|solutionrelative:pages\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\content\\estilos.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{22261148-B752-42CD-8F50-3CAD38211906}|ProyectoGrupo6.csproj|solutionrelative:content\\estilos.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,15 +30,41 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GestionarReservaciones.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\Pages\\GestionarReservaciones.aspx.cs",
+              "RelativeDocumentMoniker": "Pages\\GestionarReservaciones.aspx.cs",
+              "ToolTip": "C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\Pages\\GestionarReservaciones.aspx.cs",
+              "RelativeToolTip": "Pages\\GestionarReservaciones.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T21:28:41.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Site.Master.cs",
+              "DocumentMoniker": "C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\Site.Master.cs",
+              "RelativeDocumentMoniker": "Site.Master.cs",
+              "ToolTip": "C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\Site.Master.cs",
+              "RelativeToolTip": "Site.Master.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T21:26:16.16Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Estilos.css",
               "DocumentMoniker": "C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\Content\\Estilos.css",
               "RelativeDocumentMoniker": "Content\\Estilos.css",
@@ -38,12 +72,11 @@
               "RelativeToolTip": "Content\\Estilos.css",
               "ViewState": "AgIAAFgAAAAAAAAAAAAmwFgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-23T03:04:13.294Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-23T03:04:13.294Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Login.aspx",
               "DocumentMoniker": "C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\Pages\\Login.aspx",
               "RelativeDocumentMoniker": "Pages\\Login.aspx",
@@ -56,13 +89,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Login.aspx.cs",
               "DocumentMoniker": "C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\Pages\\Login.aspx.cs",
               "RelativeDocumentMoniker": "Pages\\Login.aspx.cs",
               "ToolTip": "C:\\Users\\Jimena Valverde\\OneDrive - CastroCarazo\\Documentos\\GitHub\\ProgramacionV\\ProyectoGrupo6\\Pages\\Login.aspx.cs",
               "RelativeToolTip": "Pages\\Login.aspx.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAADwvzQAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAADIAAAAAAAAAAADwvzYAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-22T23:51:07.337Z",
               "EditorCaption": ""

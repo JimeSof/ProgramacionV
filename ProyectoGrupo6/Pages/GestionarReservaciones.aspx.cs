@@ -11,7 +11,11 @@ namespace ProyectoGrupo6.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["nombreCompleto"] == null)
+            {
+                // Si no hay sesión activa, redirige al login
+                Response.Redirect("Login.aspx");
+            }
         }
     }
 }
