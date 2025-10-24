@@ -53,14 +53,17 @@ namespace ProyectoGrupo6.Pages
                     // Guardar datos en sesión 
                     Session["idPersona"] = idPersona;
                     Session["nombreCompleto"] = nombreCompleto;
+                    
 
                     //Despues valida si es un empleado o un cliente para redirigir al usuario
                     if (esEmpleado == true)
                     {
+                        Session["esEmpleado"] = true;
                         Response.Redirect("~/Pages/GestionarReservaciones.aspx");
                     }
                     else
                     {
+                        Session["esEmpleado"] = false;
                         Response.Redirect("~/Pages/MisReservaciones.aspx");
                     }
                 }

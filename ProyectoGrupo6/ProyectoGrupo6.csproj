@@ -265,7 +265,7 @@
     <Content Include="Global.asax" />
     <Content Include="Imagen\background.jpg" />
     <Content Include="LinqToDB.Templates\CopyMe.SqlServer.tt.txt" />
-    <Content Include="Pages\Gestionar Habitaciones.aspx" />
+    <Content Include="Pages\GestionarHabitaciones.aspx" />
     <Content Include="Pages\GestionarReservaciones.aspx" />
     <Content Include="Pages\Login.aspx" />
     <Content Include="Pages\MisReservaciones.aspx" />
@@ -379,12 +379,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Gestionar Habitaciones.aspx.cs">
-      <DependentUpon>Gestionar Habitaciones.aspx</DependentUpon>
+    <Compile Include="Pages\GestionarHabitaciones.aspx.cs">
+      <DependentUpon>GestionarHabitaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Gestionar Habitaciones.aspx.designer.cs">
-      <DependentUpon>Gestionar Habitaciones.aspx</DependentUpon>
+    <Compile Include="Pages\GestionarHabitaciones.aspx.designer.cs">
+      <DependentUpon>GestionarHabitaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\GestionarReservaciones.aspx.cs">
       <DependentUpon>GestionarReservaciones.aspx</DependentUpon>
