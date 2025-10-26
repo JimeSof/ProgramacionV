@@ -1,4 +1,20 @@
-﻿*,
+﻿/*
+CSS DE LOGIN
+
+    .shape:first-child {
+    background: linear-gradient( #1845ad, #23a2f6 );
+    left: -80px;
+    top: -80px;
+}
+
+.shape:last-child {
+    background: linear-gradient( to right, #ff512f, #f09819 );
+    right: -30px;
+    bottom: -80px;
+}
+*/
+
+*,
 *:before,
 *:after {
     padding: 0;
@@ -19,38 +35,65 @@ body {
     top: 50%;
 }
 
-    .background .shape {
-        height: 200px;
-        width: 200px;
-        position: absolute;
-        border-radius: 50%;
+
+.imagen {
+    background-size: cover;
+    height: 100vh;
+    min-height: 650px;
+    width: 100%;
+    position: relative;
+}
+
+    .imagen .heading {
+        font-family: "Playfair Display", times, serif;
+        font-weight: bold;
     }
 
-.shape:first-child {
-    background: linear-gradient( #1845ad, #23a2f6 );
-    left: -80px;
-    top: -80px;
+    .imagen.overlay:before {
+        background: rgba(0, 0, 0, 0.45);
+        content: "";
+        position: absolute;
+        height: 100vh;
+        min-height: 650px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+
+.background .shape {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
 }
 
-.shape:last-child {
-    background: linear-gradient( to right, #ff512f, #f09819 );
-    right: -30px;
-    bottom: -80px;
+.contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+    margin: 0 auto;
+    height: 100vh;
 }
+
+    .contenedor img {
+        position: relative;
+        z-index: 2;
+    }
 
 form {
-    height: 520px;
-    width: 400px;
+
+    height: 480px;
+    width: 380px;
+    bottom: 20%;
     background-color: rgba(255,255,255,0.13);
-    position: absolute;
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
+    padding: 40px 30px;
 }
 
     form * {
@@ -61,18 +104,28 @@ form {
         border: none;
     }
 
-    form h3 {
-        font-size: 32px;
-        font-weight: 500;
-        line-height: 42px;
+
+    form h2 {
         text-align: center;
+        font-size: 36px;
+        margin-bottom: 20px;
+        font-family: "Playfair Display", times, serif;
     }
 
+.icon-container {
+    display: flex;
+    justify-content: center;
+    font-size: 95px; 
+    color: #333; 
+}
+
 label {
-    display: block;
+    display: flex;
+    justify-content:center;
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
+
 }
 
 input {
@@ -103,36 +156,25 @@ btn1 {
     cursor: pointer;
 }
 /* Efecto al pasar el cursor */
-.btn1:hover {
+    .btn1:hover {
     background-color: #8a2be2; /* morado */
     color: white;
     border-color: #8a2be2;
     transform: scale(1.05); /* efecto de zoom */
 }
-.social {
-    margin-top: 30px;
-    display: flex;
+
+.campo-icon {
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    width: 300px; 
 }
 
-    .social div {
-        background: red;
-        width: 150px;
-        border-radius: 3px;
-        padding: 5px 10px 10px 5px;
-        background-color: rgba(255,255,255,0.27);
-        color: #eaf0fb;
-        text-align: center;
+    .campo-icon .icon i {
+        font-size: 30px;
     }
 
-        .social div:hover {
-            background-color: rgba(255,255,255,0.47);
-        }
 
-    .social .fb {
-        margin-left: 25px;
-    }
-
-    .social i {
-        margin-right: 4px;
-    }
-
+/*
+    FIN DEL CSS DEL LOGIN
+*/

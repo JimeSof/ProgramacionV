@@ -263,7 +263,9 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Imagen\background.jpg" />
+    <Content Include="Imagen\Banner.png" />
+    <Content Include="Imagen\hoteles.jpg" />
+    <Content Include="Imagen\hotel.jpg" />
     <Content Include="LinqToDB.Templates\CopyMe.SqlServer.tt.txt" />
     <Content Include="Pages\GestionarHabitaciones.aspx" />
     <Content Include="Pages\GestionarReservaciones.aspx" />

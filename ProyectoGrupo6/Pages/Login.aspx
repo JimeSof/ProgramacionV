@@ -6,39 +6,61 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Hotel Solar</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../Content/Estilos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
 
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
+    <section class="imagen overlay" style="background-image: url('/Imagen/hotel.jpg');">
 
-    <form runat="server">
-        
-        <h2>Inicio de Sesión</h2>
-        <br />
-        <br />
 
-        <div class="group">
-            <asp:Label ID="lblEmail" runat="server" Text="Email"></asp:Label>
-            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
+        <div class="contenedor">
+
+            <div>
+                <img src="../Imagen/Banner.png" />
+            </div>
+
+
+            <form runat="server">
+
+
+                <span class="icon-container">
+                    <i class="fa-solid fa-circle-user"></i>
+                </span>
+                <br />
+                <br />
+
+                <div class="group">
+                    <asp:Label ID="lblEmail" runat="server" Text="Email" ></asp:Label>
+
+                    <div class="campo-icon">
+                        <span class="icon">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
+
+                    </div>
+
+                </div>
+
+                <div class="group">
+                    <asp:Label ID="lblClave" runat="server" Text="Clave"></asp:Label>
+                    <div class="campo-icon">
+                        <span class="icon">
+                            <i class="fa-duotone fa-solid fa-lock"></i>
+                        </span>
+                        <asp:TextBox ID="txtClave" runat="server" CssClass="input"></asp:TextBox>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <asp:Button ID="btnValidar" runat="server" Text="Iniciar Sesión" OnClick="btnValidar_Click" CssClass="btn1" BackColor="White" BorderColor="White" ForeColor="Black" />
+            </form>
+
+
         </div>
-
-        <div class="group">
-            <asp:Label ID="lblClave" runat="server" Text="Clave"></asp:Label>
-            <asp:TextBox ID="txtClave" runat="server" CssClass="input"></asp:TextBox>
-        </div>
-
-        <br />
-        <br />
-        <asp:Button ID="btnValidar" runat="server" Text="Acceder" OnClick="btnValidar_Click"  CssClass="btn1" BackColor="White" BorderColor="White" ForeColor="Black" />
-
-    </form>
+    </section>
 
 </body>
 </html>
