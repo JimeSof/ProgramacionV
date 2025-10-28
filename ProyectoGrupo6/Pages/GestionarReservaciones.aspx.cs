@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using DataModels;
+using static DataModels.PvProyectoFinalDBStoredProcedures;
 
 namespace ProyectoGrupo6.Pages
 {
@@ -11,9 +13,31 @@ namespace ProyectoGrupo6.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            try
+            {
+                if (Session["idPersona"] == null)
+                {
+                    Response.Redirect("~/Pages/Login.aspx");
+                    return;
+                }
 
+                int idPersona = int.Parse(Session["idPersona"].ToString());
+         
+                using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
+                {
+                   List<SpConsultarGestionReservasionResult> gestion= db.SpConsultarGestionReservasion(idPersona).ToList();
+                    grdGestion.DataSource = gestion;
+                    grdGestion.DataBind();
+
+                }
+
+            }
+            catch
+            {
+
+            }
             
         }
+
     }
 }

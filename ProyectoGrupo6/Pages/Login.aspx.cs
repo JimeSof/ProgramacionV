@@ -1,10 +1,12 @@
 ﻿using DataModels;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 namespace ProyectoGrupo6.Pages
 {
@@ -17,7 +19,6 @@ namespace ProyectoGrupo6.Pages
 
         protected void btnValidar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 //Variables de validacion digitadas por el usuario
@@ -53,7 +54,7 @@ namespace ProyectoGrupo6.Pages
                     // Guardar datos en sesión 
                     Session["idPersona"] = idPersona;
                     Session["nombreCompleto"] = nombreCompleto;
-                    
+
 
                     //Despues valida si es un empleado o un cliente para redirigir al usuario
                     if (esEmpleado == true)
@@ -67,10 +68,12 @@ namespace ProyectoGrupo6.Pages
                         Response.Redirect("~/Pages/MisReservaciones.aspx");
                     }
                 }
-                else
+                else if (acceso != 1)
                 {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Usuario no está activo en el sistema.');", true);
 
                 }
+             
             }
             catch
             {
