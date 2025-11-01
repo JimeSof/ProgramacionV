@@ -18,7 +18,7 @@
 </head>
 <body>
     <!--Esta seccion coloca la imagen de fondo-->
-    <section class="imagen overlay" style="background-image: url('/Imagen/hotel.jpg');">
+    <section class="imagen overlay" style="background-image: url('/Imagen/hotel.png');">
 
         <!--Este div es el contenedor de dos columnas para poner el logo y el formuladio login-->
         <div class="contenedor">
@@ -30,7 +30,7 @@
 
 
             <!--Formulario para realizar el login-->
-            <form runat="server">
+            <form class="formlog" runat="server">
 
                 <div class="login-container">
                     <!--Icono-->

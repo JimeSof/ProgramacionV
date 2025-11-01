@@ -79,13 +79,6 @@ CSS DE LOGIN
     cursor: pointer;
 }
 
-label {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    font-size: 16px;
-    font-weight: 500;
-}
 
 .login-container {
     background: rgba(255, 255, 255, 0.15);
@@ -132,14 +125,47 @@ label {
         color: #ddd;
     }
 
-form *{
+.formlog {
     font-family: 'Poppins',sans-serif;
     color: #ffffff;
     letter-spacing: 0.5px;
-
 }
 
 
 /*
     FIN DEL CSS DEL LOGIN
+
+    CSS DE GESTION DE RESERVACIONES
 */
+
+.rgrid tr:nth-child(even) {
+    background-color: #eee;
+    color: black;
+}
+
+.rgrid tr:nth-child(odd) {
+    background-color: #fff;
+    color: black;
+}
+
+.rgrid-header {
+    background-color: #d4d4d4 !important;
+    color: white;
+    font-weight: bold;
+}
+
+
+.dvdetail tr td:first-child {
+    background-color: #eee !important;
+    color: black !important;
+    font-weight: bold;
+    width: 100px !important;
+}
+.dvdetail td:nth-child(2) {
+    width: 200px !important; 
+}
+
+.cajabtn {
+    display: flex;
+    gap: 17px;
+}
