@@ -12,13 +12,20 @@ namespace ProyectoGrupo6.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (Session["nombreCompleto"] == null)
+            try
             {
-                // Si no hay sesión activa, redirige al login
-                Response.Redirect("Login.aspx");
-            }
+                if (Session["nombreCompleto"] == null)
+                {
+                    // Si no hay sesión activa, vuelve al login
+                    Response.Redirect("Login.aspx");
+                }
 
-            lblUsuario.Text = Session["nombreCompleto"].ToString();
+                lblUsuario.Text = Session["nombreCompleto"].ToString();
+            }
+            catch
+            {
+
+            }
 
         }
     }

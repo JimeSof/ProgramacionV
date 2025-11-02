@@ -16,21 +16,34 @@ namespace ProyectoGrupo6.Pages
         {
             try
             {
+                //si no existe sesion, vuelve al login
                 if (Session["idPersona"] == null)
                 {
                     Response.Redirect("~/Pages/Login.aspx");
                     return;
                 }
 
-                int idPersona = int.Parse(Session["idPersona"].ToString());
 
-                using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
+                bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
+                if (esEmpleado == false)
                 {
-                    List<SpConsultarGestionReservasionResult> gestion = db.SpConsultarGestionReservasion(idPersona).ToList();
-                    grdGestion.DataSource = gestion;
-                    grdGestion.DataBind();
+                    // Si no es empleado, vuelve a mis reservaciones página
+                    Response.Redirect("~/Pages/MisReservaciones.aspx");
+                    return;
+                } 
+                if (!IsPostBack)
+                {
+                    int idPersona = int.Parse(Session["idPersona"].ToString());
 
+                    using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
+                    {
+                        List<SpConsultarGestionReservasionResult> gestion = db.SpConsultarGestionReservasion(idPersona).ToList();
+                        grdGestion.DataSource = gestion;
+                        grdGestion.DataBind();
+
+                    }
                 }
+
 
             }
             catch

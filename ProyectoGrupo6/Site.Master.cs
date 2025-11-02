@@ -23,7 +23,7 @@ namespace ProyectoGrupo6
                 //el código dentro del postback solo se ejecuta la primera vez que se carga la página.
                 if (!IsPostBack)
                 {
-                    bool esEmpleado = false; //crear una varable por defecto falsa
+                    bool esEmpleado = false; //crear una variable por defecto falsa
 
                     //session esEmpleado no puede estar vacia para realizar para mostrar la opcion 
                     if (Session["esEmpleado"] != null)

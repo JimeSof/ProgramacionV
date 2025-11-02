@@ -62,7 +62,8 @@
                             </a>
                         </li>
 
-                        
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Login.aspx">Cerrar Sesión</a></li>
+                        <!--editar este ultimo li-->
 
                     </ul>
 

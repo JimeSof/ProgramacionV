@@ -4,18 +4,19 @@
 
     <h1 style="color: #1750BA; font-family: Arial; font-weight: bold">Crear reservación</h1>
 
-    <div>
-        <div>
-            <span style="color: #1750BA; font-family: Arial;">Hotel:</span>
-            <asp:DropDownList ID="ddlHotel" runat="server" placeholder="Seleccione un Hotel"></asp:DropDownList>
-        </div>
-        <br />
-        <div>
-            <span style="color: #1750BA; font-family: Arial;">Cliente:</span>
-            <asp:DropDownList ID="ddlCliente" runat="server" placeholder=""></asp:DropDownList>
+    <div class="container">
 
-        </div>
-        <br />
+            <div>
+                <span style="color: #1750BA; font-family: Arial;">Hotel:</span>
+                <asp:DropDownList ID="ddlHotel" runat="server" CssClass="form-select"></asp:DropDownList>
+            </div>
+            <br />
+
+            <div>
+                <span style="color: #1750BA; font-family: Arial;">Cliente:</span>
+                <asp:DropDownList ID="ddlCliente" runat="server" CssClass="form-select"></asp:DropDownList>
+            </div>
+            <br />
 
         <div class="row">
             <div class="col-3">
@@ -42,8 +43,8 @@
         <br />
 
         <div>
-            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" />
-            <a href="GestionarReservaciones.aspx" class="btn btn-danger" role="button">Cancelar</a>
+            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="btnGuardar_Click" />
+            <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-danger" OnClick="btnRegresar_Click" />
         </div>
 
     </div>
