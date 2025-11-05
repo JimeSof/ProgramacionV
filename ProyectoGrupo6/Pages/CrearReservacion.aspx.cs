@@ -28,7 +28,8 @@ namespace ProyectoGrupo6.Pages
                     {
                         var hotel = (from Hotel in db.Hotels
                                      select new
-                                     {   Hotel.IdHotel,
+                                     {
+                                         Hotel.IdHotel,
                                          Hotel.Nombre
                                      }).ToList();
 
@@ -73,7 +74,7 @@ namespace ProyectoGrupo6.Pages
                             {
                                 ddlCliente.Items.Clear();
                                 ddlCliente.Items.Add(new ListItem(nombrePersona[0].NombreCompleto.ToString()));
-                                ddlCliente.Enabled = false; 
+                                ddlCliente.Enabled = false;
                             }
 
                         }
@@ -92,7 +93,8 @@ namespace ProyectoGrupo6.Pages
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-
+            using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
+            { }
         }
 
         protected void btnRegresar_Click(object sender, EventArgs e)
