@@ -92,10 +92,6 @@ namespace ProyectoGrupo6.Pages
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
-            {
-
-            }
 
         }
 
