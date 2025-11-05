@@ -1,0 +1,13 @@
+# Archivos y carpetas que Visual Studio genera automáticamente
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.db
+*.vsidx
+*.cache
+*.log
+*.tlog
+*.pdb
+*.tmp
