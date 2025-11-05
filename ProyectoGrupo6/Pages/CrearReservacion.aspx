@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h1 style="color: #1750BA; font-family: Arial; font-weight: bold">Crear reservación ejemplos</h1>
+    <h1 style="color: #1750BA; font-family: Arial; font-weight: bold">Crear reservación</h1>
 
     <div class="container">
 
