@@ -42,6 +42,15 @@ namespace ProyectoGrupo6.Pages
         protected global::System.Web.UI.WebControls.DropDownList ddlCliente;
 
         /// <summary>
+        /// Control rfvCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCliente;
+
+        /// <summary>
         /// Control txtFechaEntrada.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,24 @@ namespace ProyectoGrupo6.Pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFechaEntrada;
+
+        /// <summary>
+        /// Control rfvFechEntrada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFechEntrada;
+
+        /// <summary>
+        /// Control cuvFechaEntrada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cuvFechaEntrada;
 
         /// <summary>
         /// Control txtFechaSalida.
@@ -60,6 +87,24 @@ namespace ProyectoGrupo6.Pages
         protected global::System.Web.UI.WebControls.TextBox txtFechaSalida;
 
         /// <summary>
+        /// Control rfvFechaSalida.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFechaSalida;
+
+        /// <summary>
+        /// Control cuvFechaSalida.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cuvFechaSalida;
+
+        /// <summary>
         /// Control txtAdultos.
         /// </summary>
         /// <remarks>
@@ -69,6 +114,15 @@ namespace ProyectoGrupo6.Pages
         protected global::System.Web.UI.WebControls.TextBox txtAdultos;
 
         /// <summary>
+        /// Control rgvNumeroAdultos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rgvNumeroAdultos;
+
+        /// <summary>
         /// Control txtNinos.
         /// </summary>
         /// <remarks>
@@ -76,6 +130,15 @@ namespace ProyectoGrupo6.Pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNinos;
+
+        /// <summary>
+        /// Control rgvNumeroNinhos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rgvNumeroNinhos;
 
         /// <summary>
         /// Control btnGuardar.
