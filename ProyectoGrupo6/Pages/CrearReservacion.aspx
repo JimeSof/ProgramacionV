@@ -6,17 +6,20 @@
 
     <div class="container">
 
-            <div>
-                <span style="color: #1750BA; font-family: Arial;">Hotel:</span>
-                <asp:DropDownList ID="ddlHotel" runat="server" CssClass="form-select"></asp:DropDownList>
-            </div>
-            <br />
 
-            <div>
-                <span style="color: #1750BA; font-family: Arial;">Cliente:</span>
-                <asp:DropDownList ID="ddlCliente" runat="server" CssClass="form-select"></asp:DropDownList>
-            </div>
-            <br />
+        <div>
+            <span style="color: #1750BA; font-family: Arial;">Hotel:</span>
+            <asp:DropDownList ID="ddlHotel" runat="server" CssClass="form-select"></asp:DropDownList>
+            <asp:RequiredFieldValidator ID="rfvHotel" runat="server" InitialValue="0"
+                ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+        </div>
+        <br />
+
+        <div>
+            <span style="color: #1750BA; font-family: Arial;">Cliente:</span>
+            <asp:DropDownList ID="ddlCliente" runat="server" CssClass="form-select"></asp:DropDownList>
+        </div>
+        <br />
 
         <div class="row">
             <div class="col-3">

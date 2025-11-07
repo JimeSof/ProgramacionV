@@ -24,8 +24,12 @@ namespace ProyectoGrupo6.Pages
 
                 if (!IsPostBack)
                 {
+                    //Los DropDownList necesitan capturar los valores desde la base de datos
+                    //estos se llaman con una variable y se realiza el llamado de la tabla y capturamos los valores con un select
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                     {
+
+                        //llamado de valores del hotel
                         var hotel = (from Hotel in db.Hotels
                                      select new
                                      {
@@ -40,7 +44,7 @@ namespace ProyectoGrupo6.Pages
 
                         ddlHotel.Items.Insert(0, new ListItem("Seleccione un hotel", ""));
 
-
+                        //se comprueba si el usuario es empleado para que muestre todos los clientes
                         bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
                         if (esEmpleado == true)
                         {
@@ -60,6 +64,7 @@ namespace ProyectoGrupo6.Pages
                         }
                         else
                         {
+                            //si no es empleado solo puede mostrar al usuario que realiza login al sistema en el campo del dropdownlist
                             int idPersona = int.Parse(Session["idPersona"].ToString());
 
                             var nombrePersona = (from Persona in db.Personas
@@ -79,7 +84,6 @@ namespace ProyectoGrupo6.Pages
 
                         }
 
-
                     }
                 }
 
@@ -92,13 +96,31 @@ namespace ProyectoGrupo6.Pages
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
-        {
-            using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
-            { }
+        {       //Realiza el guardado de datos creados por medio del boton
+            try
+            {
+                //iniciar los valores en 0 siempre 
+                int idHotel = 0;
+               // int idCliente = 0;
+
+                //comprobat que los dropdownlist esten llenos
+                if (!string.IsNullOrEmpty(ddlHotel.SelectedValue))
+                    idHotel = int.Parse(ddlHotel.SelectedValue);
+
+                
+                using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
+                {
+
+
+                }
+            }
+            catch { }
         }
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
+            //boton regresar, si es empleado regresa al gestionarReservaciones
+            //si es cliente debe regresar a MisReservaciones
             bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
 
             if (esEmpleado == true)
