@@ -191,6 +191,29 @@ BEGIN
 END
 GO
 
+/*PROCEDIMIENTO DE CAPTURAR VALORES DE HOTEL*/
+
+CREATE PROCEDURE [dbo].[spObtenerHoteles]
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT idHotel, nombre FROM [PV_ProyectoFinal].dbo.Hotel
+    ORDER BY nombre asc;
+END;
+
+/*PROCEDIMIENTO DE CAPTURAR A LOS CLIENTES*/
+
+USE [PV_ProyectoFinal]
+GO
+CREATE PROCEDURE [dbo].[spObtenerCientes]
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT idPersona, nombreCompleto FROM [PV_ProyectoFinal].dbo.Persona
+    WHERE estado = 'A'
+    ORDER BY nombreCompleto asc;
+END;
+
 
 /* PROCEDIMIENTO QUE CREA UNA RESERVACIÓN EN LA BASE
 
@@ -218,8 +241,8 @@ y por ultmo el insert junto a un update para actualizar el estado de la habitaci
 USE [PV_ProyectoFinal]
 GO
 CREATE PROCEDURE [dbo].[spCrearReservacion]
- @nombreHotel Varchar(150),
- @nombrePersona VARCHAR(250),
+ @idPersona int,
+ @idHotel int,
  @fechaEntrada DateTime,
  @fechaSalida DateTime,
  @numeroNinhos int,
@@ -229,16 +252,6 @@ CREATE PROCEDURE [dbo].[spCrearReservacion]
  @costoTotal numeric(14,2)
 AS
 BEGIN
-
-    DECLARE @idHotel int;
-    SELECT TOP 1 @idHotel = idHotel
-        FROM Hotel
-        WHERE nombre = @nombreHotel;
-
-    Declare @idPersona int;
-    SELECT TOP 1 @idPersona = idPersona
-        FROM Persona
-        WHERE nombreCompleto = @nombrePersona;
 
     Declare @idHabitacion int;
     SELECT TOP 1 @idHabitacion = idHabitacion

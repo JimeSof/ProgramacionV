@@ -350,6 +350,36 @@ namespace DataModels
 
 		#endregion
 
+		#region SpObtenerCientes
+
+		public static IEnumerable<SpObtenerCientesResult> SpObtenerCientes(this PvProyectoFinalDB dataConnection)
+		{
+			return dataConnection.QueryProc<SpObtenerCientesResult>("[dbo].[spObtenerCientes]");
+		}
+
+		public partial class SpObtenerCientesResult
+		{
+			[Column("idPersona")     ] public int    IdPersona      { get; set; }
+			[Column("nombreCompleto")] public string NombreCompleto { get; set; }
+		}
+
+		#endregion
+
+		#region SpObtenerHoteles
+
+		public static IEnumerable<SpObtenerHotelesResult> SpObtenerHoteles(this PvProyectoFinalDB dataConnection)
+		{
+			return dataConnection.QueryProc<SpObtenerHotelesResult>("[dbo].[spObtenerHoteles]");
+		}
+
+		public partial class SpObtenerHotelesResult
+		{
+			[Column("idHotel")] public int    IdHotel { get; set; }
+			[Column("nombre") ] public string Nombre  { get; set; }
+		}
+
+		#endregion
+
 		#region SpObtenerReservacionById
 
 		public static IEnumerable<SpObtenerReservacionByIdResult> SpObtenerReservacionById(this PvProyectoFinalDB dataConnection, int? @idReservacion, int? @idPersona, bool? @esEmpleado)
