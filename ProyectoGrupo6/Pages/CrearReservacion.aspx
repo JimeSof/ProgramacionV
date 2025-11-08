@@ -54,17 +54,23 @@
         <div class="row">
             <div class="col-3">
                 <label style="color: #1750BA;">Número de adultos:</label>
-                <asp:TextBox ID="txtAdultos" runat="server" CssClass="form-control" Text="1" TextMode="Number"></asp:TextBox>
+                <asp:TextBox ID="txtNumAdultos" runat="server" CssClass="form-control" Text="1" TextMode="Number"></asp:TextBox>
                 <!--Validaciones-->
-                <asp:RangeValidator ID="rgvNumeroAdultos" runat="server" ErrorMessage="Debe ser mayor a 0" MinimumValue="1"></asp:RangeValidator>
+                <asp:RequiredFieldValidator ID="rfvNumeroAdultos" runat="server" ControlToValidate="txtNumAdultos"
+                    ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                <asp:CustomValidator ID="cuvNumeroAdultos" runat="server" ErrorMessage="Cantidad no valida para la habitacion"
+                    ForeColor="Red" OnServerValidate="cuvNumeroAdultos_ServerValidate"></asp:CustomValidator>
             </div>
             <div class="col-3">
                 <label style="color: #1750BA;">Número de niños:</label>
-                <asp:TextBox ID="txtNinos" runat="server" CssClass="form-control" Text="0" TextMode="Number"></asp:TextBox>
+                <asp:TextBox ID="txtNumNinos" runat="server" CssClass="form-control" Text="0" TextMode="Number"></asp:TextBox>
                 <!--Validaciones-->
-                <asp:RangeValidator ID="rgvNumeroNinhos" runat="server" ErrorMessage="Debe ser mayor o igual a 0" MinimumValue="0"></asp:RangeValidator>
+                <asp:RequiredFieldValidator ID="rfvNumNinhos" runat="server" InitialValue="" ControlToValidate="txtNumNinos"
+                    ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
 
             </div>
+
+
         </div>
         <br />
 

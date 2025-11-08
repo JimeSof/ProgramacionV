@@ -214,6 +214,41 @@ BEGIN
     ORDER BY nombreCompleto asc;
 END;
 
+/*PROCEDIMIENTO OBTENER CANTIDADES Y HABITACION*/
+
+USE [PV_ProyectoFinal]
+GO
+CREATE PROCEDURE [dbo].[spObtenerCostosyHabitacion]
+    @idHotel INT,
+    @personasTotal INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @idHabitacion INT;
+    DECLARE @capacidadMaxima INT;
+
+    
+    SELECT TOP 1 
+        @idHabitacion = h.idHabitacion,
+        @capacidadMaxima = h.capacidadMaxima
+    FROM Habitacion h
+    WHERE h.idHotel = @idHotel 
+        AND h.estado = 'A'
+        AND h.capacidadMaxima >= @personasTotal
+    ORDER BY h.capacidadMaxima;
+
+
+    -- Devolver precios y datos necesarios
+    SELECT
+        h.costoPorCadaAdulto,
+        h.costoPorCadaNinho,
+        @capacidadMaxima AS capacidadMaxima,
+        @idHabitacion AS idHabitacion
+    FROM Hotel h
+    WHERE h.idHotel = @idHotel;
+END;
+
 
 /* PROCEDIMIENTO QUE CREA UNA RESERVACIÓN EN LA BASE
 
@@ -242,28 +277,23 @@ USE [PV_ProyectoFinal]
 GO
 CREATE PROCEDURE [dbo].[spCrearReservacion]
  @idPersona int,
- @idHotel int,
+ @idHabitacion int,
  @fechaEntrada DateTime,
  @fechaSalida DateTime,
  @numeroNinhos int,
  @numeroAdultos int,
  @costoPorCadaAdulto numeric(10,2),
- @costoPorCadaNinho numeric(10,2),
- @costoTotal numeric(14,2)
+ @costoPorCadaNinho numeric(10,2)
 AS
 BEGIN
 
-    Declare @idHabitacion int;
-    SELECT TOP 1 @idHabitacion = idHabitacion
-        FROM Habitacion
-        WHERE idHotel = @idHotel AND estado = 'A';
-     
-    
     DECLARE @totalDias INT;
-
     SET @totalDias = DATEDIFF(DAY, @fechaEntrada, @fechaSalida);
     IF @totalDias <= 0
         SET @totalDias = 1; --minimo 1 día
+
+    DECLARE @CostoTotal numeric(14,2);
+    SET @CostoTotal =  @totalDias * ((@numeroAdultos * @costoPorCadaAdulto) + (@numeroNinhos * @costoPorCadaNinho));
 
 
   INSERT INTO [dbo].[Reservacion]
