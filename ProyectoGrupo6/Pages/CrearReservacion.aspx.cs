@@ -17,7 +17,7 @@ namespace ProyectoGrupo6.Pages
         {
 
             try
-            {
+            {//CARGAR PAGINA
                 //si no existe sesion, vuelve al login
                 if (Session["idPersona"] == null)
                 {
@@ -186,7 +186,7 @@ namespace ProyectoGrupo6.Pages
             }
             catch { }
         }
-
+        
         protected void cuvFechaSalida_ServerValidate(object source, ServerValidateEventArgs args)
         {
             try
