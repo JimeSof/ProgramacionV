@@ -105,40 +105,49 @@ namespace ProyectoGrupo6.Pages
         protected global::System.Web.UI.WebControls.CustomValidator cuvFechaSalida;
 
         /// <summary>
-        /// Control txtAdultos.
+        /// Control txtNumAdultos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAdultos;
+        protected global::System.Web.UI.WebControls.TextBox txtNumAdultos;
 
         /// <summary>
-        /// Control rgvNumeroAdultos.
+        /// Control rfvNumeroAdultos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator rgvNumeroAdultos;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumeroAdultos;
 
         /// <summary>
-        /// Control txtNinos.
+        /// Control cuvNumeroAdultos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNinos;
+        protected global::System.Web.UI.WebControls.CustomValidator cuvNumeroAdultos;
 
         /// <summary>
-        /// Control rgvNumeroNinhos.
+        /// Control txtNumNinos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator rgvNumeroNinhos;
+        protected global::System.Web.UI.WebControls.TextBox txtNumNinos;
+
+        /// <summary>
+        /// Control rfvNumNinhos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumNinhos;
 
         /// <summary>
         /// Control btnGuardar.
