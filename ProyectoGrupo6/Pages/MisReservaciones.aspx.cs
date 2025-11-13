@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoGrupo6.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,13 +15,9 @@ namespace ProyectoGrupo6.Pages
 
             try
             {
-                if (Session["nombreCompleto"] == null)
-                {
-                    // Si no hay sesión activa, vuelve al login
-                    Response.Redirect("Login.aspx");
-                }
 
-                lblUsuario.Text = Session["nombreCompleto"].ToString();
+                Usuario usuario = (Usuario)Session["nombreCompleto"];
+                lblUsuario.Text = usuario.nombreCompleto;
             }
             catch
             {

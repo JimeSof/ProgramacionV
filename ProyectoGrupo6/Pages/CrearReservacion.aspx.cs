@@ -17,7 +17,7 @@ namespace ProyectoGrupo6.Pages
         {
 
             try
-            {//CARGAR PAGINA
+            {
                 //si no existe sesion, vuelve al login
                 if (Session["idPersona"] == null)
                 {
