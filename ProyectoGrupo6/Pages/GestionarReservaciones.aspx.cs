@@ -16,12 +16,6 @@ namespace ProyectoGrupo6.Pages
         {
             try
             {
-                //si no existe sesion, vuelve al login
-                if (Session["idPersona"] == null)
-                {
-                    Response.Redirect("~/Pages/Login.aspx");
-                    return;
-                }
 
 
                 bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
