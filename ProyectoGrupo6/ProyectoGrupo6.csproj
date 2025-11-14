@@ -263,6 +263,7 @@
     </Content>
     <Content Include="Default.aspx" />
     <Content Include="Imagen\hotel.png" />
+    <Content Include="Login.aspx" />
     <Content Include="Pages\Detalle.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -271,7 +272,6 @@
     <Content Include="Pages\CrearReservacion.aspx" />
     <Content Include="Pages\GestionarHabitaciones.aspx" />
     <Content Include="Pages\GestionarReservaciones.aspx" />
-    <Content Include="Login.aspx" />
     <Content Include="Pages\MisReservaciones.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -382,6 +382,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Detalle.aspx.cs">
       <DependentUpon>Detalle.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -412,13 +419,6 @@
     </Compile>
     <Compile Include="Pages\GestionarReservaciones.aspx.designer.cs">
       <DependentUpon>GestionarReservaciones.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\MisReservaciones.aspx.cs">
       <DependentUpon>MisReservaciones.aspx</DependentUpon>
