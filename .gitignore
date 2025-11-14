@@ -1,5 +1,47 @@
 ﻿################################################################################
-# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+# Archivo .gitignore para proyectos ASP.NET en Visual Studio
 ################################################################################
+
+# Carpetas de compilación
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+*.dbmdl
+
+# ASP.NET temporales
+_AppStart/
+App_Data/
+*.log
+*.temp
+*.tmp
+*~
+
+# Publicación
+PublishProfiles/
+*.Publish.xml
+
+# NuGet
+packages/
+*.nupkg
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Archivos de IIS
+*.vspscc
+*.vssscc
+
+# Otros
+*.pdb
+
 
 !/ProyectoGrupo6/Login.aspx
