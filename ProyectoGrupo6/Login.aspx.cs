@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace ProyectoGrupo6
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class Login1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,7 +40,7 @@ namespace ProyectoGrupo6
                 //Conexion a la base 
                 using (var db = new PvProyectoFinalDB("Database"))
                 {
-                    // Llamada directa del procedimiento almacenado
+                    // Llamada directa del procedimiento almacenado 
                     // Se colocan las variables con los parametros del procedimiento
                     db.SpLOGIN(
                         email: usuario.email,

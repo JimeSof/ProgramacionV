@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ProyectoGrupo6.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ProyectoGrupo6.Login1" %>
 
 <!DOCTYPE html>
 
@@ -17,7 +17,7 @@
 
 </head>
 <body>
-    <!--Esta seccion coloca la imagen de fondo-->
+    <!--Esta seccion coloca la imagen de fondo -->
     <section class="imagen overlay" style="background-image: url('/Imagen/hotel.png');">
         
         <!--Este div es el contenedor de dos columnas para poner el logo y el formuladio login-->
