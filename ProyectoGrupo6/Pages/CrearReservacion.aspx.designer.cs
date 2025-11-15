@@ -96,15 +96,6 @@ namespace ProyectoGrupo6.Pages
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFechaSalida;
 
         /// <summary>
-        /// Control cuvFechaSalida.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cuvFechaSalida;
-
-        /// <summary>
         /// Control txtNumAdultos.
         /// </summary>
         /// <remarks>

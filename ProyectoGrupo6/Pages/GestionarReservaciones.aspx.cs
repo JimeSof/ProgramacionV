@@ -1,11 +1,13 @@
-﻿using System;
+﻿using DataModels;
+using ProyectoGrupo6.Classes;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
-using DataModels;
 using static DataModels.PvProyectoFinalDBStoredProcedures;
 
 namespace ProyectoGrupo6.Pages
@@ -16,18 +18,20 @@ namespace ProyectoGrupo6.Pages
         {
             try
             {
+                Usuario usuario = (Usuario)Session["Usuario"];
 
-
-                bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
+                bool esEmpleado = Convert.ToBoolean(usuario.esEmpleado);
                 if (esEmpleado == false)
                 {
                     // Si no es empleado, vuelve a mis reservaciones página
                     Response.Redirect("~/Pages/MisReservaciones.aspx");
                     return;
-                } 
+                }
                 if (!IsPostBack)
                 {
-                    int idPersona = int.Parse(Session["idPersona"].ToString());
+
+
+                    int idPersona = Convert.ToInt32(usuario.idPersona);
 
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                     {
@@ -44,12 +48,12 @@ namespace ProyectoGrupo6.Pages
             {
 
             }
-            
+
         }
 
         public String EvaluarEstado(string estado, DateTime fechaEntrada, DateTime fechaSalida)
         {
-           
+
             DateTime fechaActual = DateTime.Now;
             string respuesta = "";
 
@@ -66,7 +70,39 @@ namespace ProyectoGrupo6.Pages
             return respuesta;
         }
 
-        
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
 
+
+            }
+
+        }
+
+        protected void cuvFechas_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                DateTime entrada = Convert.ToDateTime(txtFechaEntrada.Text);
+                DateTime salida = Convert.ToDateTime(txtFechaSalida.Text);
+
+
+                //asumir args es falso
+                args.IsValid = false;
+
+                if (entrada <= salida)
+                {
+
+                    args.IsValid = true;
+                }
+                else
+                {
+                    args.IsValid = false;
+                }
+            }
+            catch { }
+
+        }
     }
 }

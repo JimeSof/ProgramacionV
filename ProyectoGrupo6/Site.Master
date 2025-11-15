@@ -62,7 +62,8 @@
                             </a>
                         </li>
 
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Login.aspx">Cerrar Sesión</a></li>
+                        <li class="nav-item">
+                            <asp:LinkButton ID="lbtnCerrar" runat="server" OnClick="lbtnCerrar_Click" CssClass="nav-link">Cerrar Sesión</asp:LinkButton></li>
                         <!--editar este ultimo li-->
 
                     </ul>

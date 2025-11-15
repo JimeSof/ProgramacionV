@@ -1,4 +1,5 @@
 ﻿using DataModels;
+using ProyectoGrupo6.Classes;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,17 +19,13 @@ namespace ProyectoGrupo6.Pages
 
             try
             {
-                //si no existe sesion, vuelve al login
-                if (Session["idPersona"] == null)
-                {
-                    Response.Redirect("~/Pages/Login.aspx");
-                    return;
-                }
+
 
                 if (!IsPostBack)
                 {
                     //Los DropDownList necesitan capturar los valores desde la base de datos
                     //estos se llaman con una variable que busca el procedimiento 
+
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                     {
                         //obtener hoteles
@@ -44,9 +41,7 @@ namespace ProyectoGrupo6.Pages
                         //obtener clientes
                         var clientes = db.SpObtenerCientes().ToList();
 
-                        //se comprueba si el usuario es empleado para que muestre todos los clientes
                         bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
-
                         if (esEmpleado == true)
                         {
                             //si es empleado, campo desbloqueado
@@ -78,12 +73,15 @@ namespace ProyectoGrupo6.Pages
             catch { }
         }
 
+        //Realiza el guardado de datos creados por medio del boton
         protected void btnGuardar_Click(object sender, EventArgs e)
-        {       //Realiza el guardado de datos creados por medio del boton
+        {
             if (Page.IsValid)
             {
                 try
-                {
+                {  // Hotel hotel = new Hotel();
+                   // Reservacion reservacion = new Reservacion();    
+
                     //iniciar los valores en 0 
                     int idHotel = 0;
                     int idPersona = 0;
@@ -100,7 +98,7 @@ namespace ProyectoGrupo6.Pages
                     //variables de cantidad y para capturar los costos
                     int numeroAdultos = Convert.ToInt32(txtNumAdultos.Text);
                     int numeroNinhos = Convert.ToInt32(txtNumNinos.Text);
-                   
+
                     decimal precioAdul = 0;
                     decimal precioNinh = 0;
 
@@ -110,7 +108,7 @@ namespace ProyectoGrupo6.Pages
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                     {
                         //este procedimiento se llama para capturar los costos de adultos y niños y el id de la habitacion
-                        var costosHabit = db.SpObtenerCostosyHabitacion(idHotel,cantidadPer).FirstOrDefault();
+                        var costosHabit = db.SpObtenerCostosyHabitacion(idHotel, cantidadPer).FirstOrDefault();
 
                         if (costosHabit != null)
                         {
@@ -119,15 +117,15 @@ namespace ProyectoGrupo6.Pages
                             idHabitacion = Convert.ToInt32(costosHabit.IdHabitacion);
                         }
 
-                        
+
                         //procedimiento es llamado para crear los datos despues de pasar por todas las validaciones 
-                        db.SpCrearReservacion(idPersona, idHabitacion,fechaEntrada,fechaSalida,
-                                            numeroNinhos,numeroAdultos,precioAdul,precioNinh);
+                        db.SpCrearReservacion(idPersona, idHabitacion, fechaEntrada, fechaSalida,
+                                            numeroNinhos, numeroAdultos, precioAdul, precioNinh);
 
                     }
-                   
+
                 }
-                catch {}
+                catch { }
 
                 Response.Redirect("~/Pages/GestionarReservaciones.aspx");
 
@@ -159,8 +157,6 @@ namespace ProyectoGrupo6.Pages
         {       //validaciones de la fecha de entrada
             try
             {
-                //detectar errores en las fechas de entrada
-                String stgfechaEntrada = txtFechaSalida.Text;
 
                 //formato de la fecha
                 bool fechaEntradaV = DateTime.TryParseExact(
@@ -169,6 +165,13 @@ namespace ProyectoGrupo6.Pages
                     DateTimeStyles.None,
                     out DateTime fechaEntrada);
 
+                bool fechaSalidaV = DateTime.TryParseExact(
+                 txtFechaSalida.Text, "yyyy-MM-dd",
+                 CultureInfo.InvariantCulture,
+                 DateTimeStyles.None,
+                 out DateTime fechaSalida);
+
+
                 //asumir args es falso
                 args.IsValid = false;
 
@@ -176,60 +179,27 @@ namespace ProyectoGrupo6.Pages
                 if (!fechaEntradaV || fechaEntrada <= DateTime.Today)
                 {
                     cuvFechaEntrada.ErrorMessage =
-                        "Fecha de entrada invalida, debe ser formato dd/MM/yyyy y mayor a hoy.";
-                }
-                else
+                        "Fecha de entrada invalida, debe ser mayor a hoy.";
+
+                }else if (!fechaEntradaV || !fechaSalidaV)
                 {
-                    args.IsValid = true;
-                }
-
-            }
-            catch { }
-        }
-        
-        protected void cuvFechaSalida_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            try
-            {
-                //detectar errores en las fechas de salida
-                String stgfechaSalida = txtFechaSalida.Text;
-
-                //formato de la fecha entrada
-                bool fechaEntradaV = DateTime.TryParseExact(
-                    txtFechaEntrada.Text, "yyyy-MM-dd",
-                    CultureInfo.InvariantCulture,
-                    DateTimeStyles.None,
-                    out DateTime fechaEntrada);
-
-
-                //formato de la fecha salida
-                bool fechaSalidaV = DateTime.TryParseExact(
-                    txtFechaSalida.Text, "yyyy-MM-dd",
-                    CultureInfo.InvariantCulture,
-                    DateTimeStyles.None,
-                    out DateTime fechaSalida);
-
-
-                //asumir args es falso
-                args.IsValid = false;
-
-                if (!fechaEntradaV || !fechaSalidaV)
-                {
-                    cuvFechaSalida.ErrorMessage = "Formato de fecha inválido.";
+                    cuvFechaEntrada.ErrorMessage = "Formato de fecha inválido.";
                 }
                 else if (fechaSalida < fechaEntrada)
                 {
-                    cuvFechaSalida.ErrorMessage = "La fecha de salida debe ser mayor a la fecha de entrada.";
+                    cuvFechaEntrada.ErrorMessage = "La fecha de salida debe ser mayor a la fecha de entrada.";
                 }
                 else
                 {
                     args.IsValid = true;
-
                 }
+
+
             }
             catch { }
-
         }
+
+     
 
         protected void cuvNumeroAdultos_ServerValidate(object source, ServerValidateEventArgs args)
         {       //validaciones de las cantidades (este custom valida las cantidades de los campos adulto y niños)
@@ -248,17 +218,17 @@ namespace ProyectoGrupo6.Pages
 
                 //suma de huespedes y se pasan al procedimiento
                 int cantidadActual = numAdultos + numNinhos;
-                
+
                 args.IsValid = false;
 
                 //llamado de la base para traer los datos de cantidad maxima y la habitacion seleccionada
                 using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
-                {   
+                {
                     //llamar procedimiento
                     var cantidades = db.SpObtenerCostosyHabitacion(idHotel, cantidadActual).FirstOrDefault();
 
                     if (cantidades == null)
-                    {   
+                    {
                         //si no hay una habitaciones lanza el mensaje
                         cuvNumeroAdultos.ErrorMessage = "No hay habitaciones disponibles para la cantidad de huespedes";
                         args.IsValid = false;
@@ -289,7 +259,8 @@ namespace ProyectoGrupo6.Pages
                         args.IsValid = true;
                     }
                 }
-                
+
+
             }
             catch { }
         }

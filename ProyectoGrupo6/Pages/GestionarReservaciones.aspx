@@ -1,16 +1,38 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GestionarReservaciones.aspx.cs" Inherits="ProyectoGrupo6.Pages.GestionarReservaciones" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    
+
     <link rel="stylesheet" href="../Content/Estilos.css" />
 
     <h1 style="font-family: Arial, Helvetica, sans-serif">Gestionar Reservaciones</h1>
 
     <!--El filtro de busqueda-->
-    <div id="flitro">
-        <asp:BulletedList ID="BulletedList1" runat="server"></asp:BulletedList>
+    <div id="flitro" class="row">
+        <div class="col-3">
+            <asp:Label ID="lbCliente" runat="server" Text="Cliente"></asp:Label>
+            <asp:DropDownList ID="ddlCliente" runat="server" CssClass="form-select"></asp:DropDownList>
+        </div>
+        <div class="col-3">
+            <asp:Label ID="lbFechaEntrada" runat="server" Text="Fecha Entrada"></asp:Label>
+            <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+            <!--Validaciones-->
+            <asp:RequiredFieldValidator ID="rfvFechaEntrada" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtFechaEntrada"></asp:RequiredFieldValidator>
+          
+            <asp:CustomValidator ID="cuvFechas" runat="server" ErrorMessage="Fechas invalidas"
+                OnServerValidate="cuvFechas_ServerValidate" ForeColor="Red" Display="Dynamic"></asp:CustomValidator>
+        </div>
+        <div class="col-3">
+            <asp:Label ID="lbFechaSalida" runat="server" Text="Fecha Salida"></asp:Label>
+            <asp:TextBox ID="txtFechaSalida" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+            <!--Validaciones-->
+            <asp:RequiredFieldValidator ID="rfvFechaSalida" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtFechaSalida"></asp:RequiredFieldValidator>
+        </div>
+        <div class="col-3">
+            <br />
+            <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" CssClass="btn btn-outline-dark" />
+        </div>
     </div>
-
+    <br />
     <div>
         <a href="CrearReservacion.aspx" class="btn btn-primary" role="button">Nuevo reservación</a>
     </div>
