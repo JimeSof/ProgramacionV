@@ -53,7 +53,6 @@ namespace ProyectoGrupo6
                 }
 
                 //Asignar las variables al objeto Usuario
-
                 usuario.idPersona = idPersona;
                 usuario.esEmpleado = esEmpleado;
                 usuario.nombreCompleto = nombreCompleto;
@@ -65,8 +64,7 @@ namespace ProyectoGrupo6
                 if (acceso == 1)
                 {
                     // Guardar datos en sesión 
-                    Session["idPersona"] = idPersona;
-                    Session.Add("nombreCompleto", usuario);
+                    Session.Add("Usuario", usuario);
 
                     FormsAuthentication.SetAuthCookie(usuario.email, false);
 

@@ -16,7 +16,7 @@ namespace ProyectoGrupo6.Pages
             try
             {
 
-                Usuario usuario = (Usuario)Session["nombreCompleto"];
+                Usuario usuario = (Usuario)Session["Usuario"];
                 lblUsuario.Text = usuario.nombreCompleto;
             }
             catch

@@ -44,8 +44,6 @@
                 <asp:RequiredFieldValidator ID="rfvFechaSalida" runat="server" InitialValue="" ControlToValidate="txtFechaSalida"
                     ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
 
-                <asp:CustomValidator ID="cuvFechaSalida" runat="server" ErrorMessage="La fecha es invalida" ControlToValidate="txtFechaSalida"
-                    OnServerValidate="cuvFechaSalida_ServerValidate" ForeColor="Red" Display="Dynamic"></asp:CustomValidator>
             </div>
         </div>
 
