@@ -1,4 +1,5 @@
 ﻿using DataModels;
+using ProyectoGrupo6.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,13 @@ namespace ProyectoGrupo6
         {
             try
             {
-
+                Usuario usuario = (Usuario)Session["Usuario"];
                 if (!IsPostBack)
                 {
                     int id = int.Parse(Request.QueryString["idReservacion"]);
 
 
-                    int idPersona = int.Parse(Session["idPersona"].ToString());
+                    int idPersona = int.Parse(usuario.idPersona.ToString());
                     bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
 
 
@@ -77,8 +78,12 @@ namespace ProyectoGrupo6
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            string id = Request.QueryString["idReservacion"];
-            Response.Redirect("Editar...aspx");
+            try
+            {
+                string id = Request.QueryString["idReservacion"];
+                Response.Redirect("EditarReservacion.aspx");
+            }
+            catch { }
         }
 
         protected void btnRegresar_Click(object sender, EventArgs e)
@@ -93,6 +98,11 @@ namespace ProyectoGrupo6
             {
                 Response.Redirect("MisReservaciones.aspx");
             }
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            //edu
         }
     }
 }

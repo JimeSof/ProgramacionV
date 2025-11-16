@@ -11,35 +11,71 @@ namespace ProyectoGrupo6.Pages
 {
 
 
-    public partial class GestionarReservaciones
+    public partial class EditarReservacion
     {
 
         /// <summary>
-        /// Control lbCliente.
+        /// Control lblHotel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCliente;
+        protected global::System.Web.UI.WebControls.Label lblHotel;
 
         /// <summary>
-        /// Control ddlCliente.
+        /// Control txtHotel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCliente;
+        protected global::System.Web.UI.WebControls.TextBox txtHotel;
 
         /// <summary>
-        /// Control lbFechaEntrada.
+        /// Control lblNumeroHabitacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbFechaEntrada;
+        protected global::System.Web.UI.WebControls.Label lblNumeroHabitacion;
+
+        /// <summary>
+        /// Control txtNumeroHabitacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNumeroHabitacion;
+
+        /// <summary>
+        /// Control lblCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCliente;
+
+        /// <summary>
+        /// Control txtCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCliente;
+
+        /// <summary>
+        /// Control lblFechaEntrada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFechaEntrada;
 
         /// <summary>
         /// Control txtFechaEntrada.
@@ -51,22 +87,13 @@ namespace ProyectoGrupo6.Pages
         protected global::System.Web.UI.WebControls.TextBox txtFechaEntrada;
 
         /// <summary>
-        /// Control rfvFechaEntrada.
+        /// Control lblFechaSalida.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFechaEntrada;
-
-        /// <summary>
-        /// Control lbFechaSalida.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbFechaSalida;
+        protected global::System.Web.UI.WebControls.Label lblFechaSalida;
 
         /// <summary>
         /// Control txtFechaSalida.
@@ -78,39 +105,57 @@ namespace ProyectoGrupo6.Pages
         protected global::System.Web.UI.WebControls.TextBox txtFechaSalida;
 
         /// <summary>
-        /// Control rfvFechaSalida.
+        /// Control lblNumeroAdultos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFechaSalida;
+        protected global::System.Web.UI.WebControls.Label lblNumeroAdultos;
 
         /// <summary>
-        /// Control btnFiltrar.
+        /// Control txtNumeroAdultos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFiltrar;
+        protected global::System.Web.UI.WebControls.TextBox txtNumeroAdultos;
 
         /// <summary>
-        /// Control cuvFechas.
+        /// Control lblNumeroNinhos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cuvFechas;
+        protected global::System.Web.UI.WebControls.Label lblNumeroNinhos;
 
         /// <summary>
-        /// Control grdGestion.
+        /// Control txtNumeroNinhos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdGestion;
+        protected global::System.Web.UI.WebControls.TextBox txtNumeroNinhos;
+
+        /// <summary>
+        /// Control btnGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
+
+        /// <summary>
+        /// Control btnRegresar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegresar;
     }
 }

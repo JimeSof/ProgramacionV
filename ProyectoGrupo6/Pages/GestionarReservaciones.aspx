@@ -17,9 +17,7 @@
             <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
             <!--Validaciones-->
             <asp:RequiredFieldValidator ID="rfvFechaEntrada" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtFechaEntrada"></asp:RequiredFieldValidator>
-          
-            <asp:CustomValidator ID="cuvFechas" runat="server" ErrorMessage="Fechas invalidas"
-                OnServerValidate="cuvFechas_ServerValidate" ForeColor="Red" Display="Dynamic"></asp:CustomValidator>
+           
         </div>
         <div class="col-3">
             <asp:Label ID="lbFechaSalida" runat="server" Text="Fecha Salida"></asp:Label>
@@ -30,9 +28,12 @@
         <div class="col-3">
             <br />
             <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" CssClass="btn btn-outline-dark" />
-        </div>
+        </div> 
+
+        <!--Validacion de los campos de fecha-->
+        <asp:CustomValidator ID="cuvFechas" runat="server" ErrorMessage="Fechas invalidas: Fecha de salida debe ser mayor a la fecha de entrada"
+                OnServerValidate="cuvFechas_ServerValidate" ForeColor="Red" Display="Dynamic"></asp:CustomValidator>
     </div>
-    <br />
     <div>
         <a href="CrearReservacion.aspx" class="btn btn-primary" role="button">Nuevo reservación</a>
     </div>
