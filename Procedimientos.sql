@@ -18,8 +18,6 @@ Parametros:
 El procedimiento busca realizar el login en el proyecto mientras 
 los paramtros sean iguales a los datos que estan dentro de la base
 */
-USE [PV_ProyectoFinal]
-GO
 CREATE PROCEDURE [dbo].[spLOGIN]
  @email VARCHAR(150),
  @clave VARCHAR(15),
@@ -50,8 +48,6 @@ BEGIN
 END
 GO
 
-
-
 /*PROCEDIMIENTO DE CONSULTAR PARA LA GESTION DE RESERVACIONES
     
 Parametro de entrada:
@@ -62,8 +58,7 @@ El procedimiento muestra los datos de diferentes tablas y las une atraves de inn
 se establece el orden descendente y que cumpla con la consigna de no mostrar las reservaciones 
 del empleado que realiza el login
 */
-USE [PV_ProyectoFinal]
-GO
+
 CREATE PROCEDURE [dbo].[spConsultarGestionReservasion]
 @idPersona int
 AS
@@ -83,7 +78,7 @@ BEGIN
         Where  p.idPersona <> @idPersona 
         Order by r.idReservacion DESC;
 END 
-
+GO
 
 
 /*PROCEDIMIENTO DE PARA CONSULTAR LAS RESERVACIONES DEL CLIENTE 
@@ -97,9 +92,7 @@ se establece el orden descendente y que cumpla con la consigna de no mostrar las
 del Cliente que realiza el login
 */
 
-USE [PV_ProyectoFinal]
-GO
-CREATE PROCEDURE [dbo].[spConsultarClienteReservacion] 
+CREATE PROCEDURE [dbo].[spConsultarClienteReserva] 
   @IdPersona INT
 AS
 BEGIN
@@ -112,7 +105,7 @@ BEGIN
         FROM [PV_ProyectoFinal].dbo.Reservacion r
         INNER JOIN [PV_ProyectoFinal].dbo.Persona p on r.idPersona = p.idPersona
         INNER JOIN [PV_ProyectoFinal].dbo.Habitacion hb on r.idHabitacion = hb.idHabitacion
-        INNER JOIN [PV_ProyectoFinal].dbo.Hotel H on hb.idHotel = h.idHotel
+        INNER JOIN [PV_ProyectoFinal].dbo.Hotel h on hb.idHotel = h.idHotel
         WHERE r.idPersona = @IdPersona
         Order by r.idReservacion DESC;
 END
@@ -133,8 +126,7 @@ emplea un where donde busca que coincidan las reservaciones, y busca que sea un 
 y si no que el id del cliente sea igual al de la sesión abierta.
 
 */
-USE [PV_ProyectoFinal]
-GO
+
 CREATE PROCEDURE [dbo].[spObtenerReservacionById] 
 @idReservacion int,
  @idPersona int = null,
@@ -162,7 +154,7 @@ SELECT TOP 1
         Order by r.idReservacion DESC;
 
 END
-
+GO
 
 /*PROCEDIMIENTO PARA OBTENER LA BITACORA POR ID DE RESERVACION
 
@@ -175,8 +167,7 @@ mostrando las acciones, fechas y el nombre de la persona que realiza los cambios
 
 */
 
-USE [PV_ProyectoFinal]
-GO
+
 CREATE PROCEDURE [dbo].[spObtenerBitacoraById]   
 @idReservacion int
 AS
@@ -192,7 +183,6 @@ END
 GO
 
 /*PROCEDIMIENTO DE CAPTURAR VALORES DE HOTEL*/
-
 CREATE PROCEDURE [dbo].[spObtenerHoteles]
 AS
 BEGIN
@@ -200,11 +190,11 @@ BEGIN
     SELECT idHotel, nombre FROM [PV_ProyectoFinal].dbo.Hotel
     ORDER BY nombre asc;
 END;
+GO
 
 /*PROCEDIMIENTO DE CAPTURAR A LOS CLIENTES*/
 
-USE [PV_ProyectoFinal]
-GO
+
 CREATE PROCEDURE [dbo].[spObtenerCientes]
 AS
 BEGIN
@@ -213,11 +203,10 @@ BEGIN
     WHERE estado = 'A'
     ORDER BY nombreCompleto asc;
 END;
+GO
 
 /*PROCEDIMIENTO OBTENER CANTIDADES Y HABITACION*/
 
-USE [PV_ProyectoFinal]
-GO
 CREATE PROCEDURE [dbo].[spObtenerCostosyHabitacion]
     @idHotel INT,
     @personasTotal INT
@@ -225,29 +214,33 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    DECLARE @idHabitacion INT;
-    DECLARE @capacidadMaxima INT;
-
-    
-    SELECT TOP 1 
-        @idHabitacion = h.idHabitacion,
-        @capacidadMaxima = h.capacidadMaxima
-    FROM Habitacion h
-    WHERE h.idHotel = @idHotel 
-        AND h.estado = 'A'
-        AND h.capacidadMaxima >= @personasTotal
-    ORDER BY h.capacidadMaxima;
-
-
-    -- Devolver precios y datos necesarios
-    SELECT
+    ;WITH HabitacionesValidas AS
+    (
+        SELECT 
+            hb.idHabitacion,
+            hb.capacidadMaxima,
+            (
+                SELECT COUNT(*) 
+                FROM Reservacion r 
+                WHERE r.idHabitacion = hb.idHabitacion
+            ) AS TotalReservas
+        FROM Habitacion hb
+        WHERE hb.idHotel = @idHotel
+          AND hb.estado = 'A'
+          AND hb.capacidadMaxima >= @personasTotal
+    )
+    SELECT TOP 1
         h.costoPorCadaAdulto,
         h.costoPorCadaNinho,
-        @capacidadMaxima AS capacidadMaxima,
-        @idHabitacion AS idHabitacion
-    FROM Hotel h
-    WHERE h.idHotel = @idHotel;
+        hv.capacidadMaxima,
+        hv.idHabitacion
+    FROM HabitacionesValidas hv
+    INNER JOIN Hotel h ON h.idHotel = @idHotel
+    WHERE h.idHotel = @idHotel
+    ORDER BY hv.TotalReservas ASC;  
 END;
+GO
+
 
 
 /* PROCEDIMIENTO QUE CREA UNA RESERVACIÓN EN LA BASE
@@ -273,8 +266,7 @@ y por ultmo el insert junto a un update para actualizar el estado de la habitaci
 
 
 */
-USE [PV_ProyectoFinal]
-GO
+
 CREATE PROCEDURE [dbo].[spCrearReservacion]
  @idPersona int,
  @idHabitacion int,
@@ -283,7 +275,8 @@ CREATE PROCEDURE [dbo].[spCrearReservacion]
  @numeroNinhos int,
  @numeroAdultos int,
  @costoPorCadaAdulto numeric(10,2),
- @costoPorCadaNinho numeric(10,2)
+ @costoPorCadaNinho numeric(10,2),
+ @idEmpleado int
 AS
 BEGIN
 
@@ -331,4 +324,73 @@ BEGIN
     SET estado = 'I'
     WHERE idHabitacion = @idHabitacion;
 
+   DECLARE @idReservacion INT = SCOPE_IDENTITY();
+   
+   INSERT INTO Bitacora(
+        idReservacion,
+        idPersona,
+        accionRealizada,
+        fechaDeLaAccion
+    )
+    Values( 
+        @idReservacion,
+        @idEmpleado,
+        'CREADA',
+         GETDATE());
+
 END
+GO
+
+/* PROCEDIMIENTO QUE MUESTRA LOS CLIENTES EN EL DROPDOWNLIST
+->idPersona: el dato permite comparar el usuario de la sesion y la bd, y que este no muestre su nombre en el filtro
+
+Este procedimiento permite visualizar los datos del filtro por medio de la conexion
+*/
+
+
+CREATE PROCEDURE [dbo].[spFiltroClientes]
+@idCliente int
+AS
+BEGIN
+    Select p.idPersona,
+           p.nombreCompleto
+    from Persona p
+    Where  p.idPersona <> @idCliente and
+           p.estado = 'A'
+        Order by nombreCompleto ASC;
+END
+GO
+
+/*PROCEDIMIENTO PARA FILTRAR RESERVACION EN LA TABLA
+
+-> idCliente: dato que permite filtrar por cliente seleccionado en el filtro
+-> fechaEntrada: dato que permite encontrar datos segun la fecha seleccionada
+-> fechaSalida: dato que permite encontrar datos segun la fecha seleccionada
+
+Este procedimiento permite encontrar y mostrar los datos en la tabla segun lo seleccionado en el filtro, 
+los cuales sus datos son los datos de entrada para funcionar segun el procedimiento*/
+
+
+CREATE PROCEDURE [dbo].[spFiltroReservaciones]
+@idCliente int,
+@fechaEntrada date,
+@fechaSalida date
+AS
+BEGIN
+   SELECT r.idReservacion,
+               p.nombreCompleto as cliente,
+               h.nombre as hotel, 
+               r.fechaEntrada,
+               r.fechaSalida,
+               r.costoTotal,
+               r.estado
+        FROM [PV_ProyectoFinal].dbo.Reservacion r
+        INNER JOIN [PV_ProyectoFinal].dbo.Persona p on r.idPersona = p.idPersona
+        INNER JOIN [PV_ProyectoFinal].dbo.Habitacion hb on r.idHabitacion = hb.idHabitacion
+        INNER JOIN [PV_ProyectoFinal].dbo.Hotel h on hb.idHotel = h.idHotel
+        Where (@idCliente = 0 or p.idPersona = @idCliente) 
+       and r.fechaEntrada <= @fechaSalida  
+       and r.fechaSalida >= @fechaEntrada
+        Order by r.idReservacion DESC;
+END
+GO

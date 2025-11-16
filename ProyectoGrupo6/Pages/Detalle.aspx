@@ -26,7 +26,7 @@
 
     <div class="cajabtn">
         <asp:Button ID="btnEditar" runat="server" Text="Editar reservación" CssClass="btn btn-outline-primary" Visible="false" OnClick="btnEditar_Click" />
-        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar reservación" CssClass="btn btn-outline-danger" Visible="false" />
+        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar reservación" CssClass="btn btn-outline-danger" Visible="false" OnClick="btnCancelar_Click" />
         <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-outline-secondary" OnClick="btnRegresar_Click"/>
        
     </div>

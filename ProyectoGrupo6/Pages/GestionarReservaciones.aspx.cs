@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using static DataModels.PvProyectoFinalDBStoredProcedures;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ProyectoGrupo6.Pages
 {
@@ -16,43 +17,55 @@ namespace ProyectoGrupo6.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (!IsPostBack)
             {
-                Usuario usuario = (Usuario)Session["Usuario"];
-
-                bool esEmpleado = Convert.ToBoolean(usuario.esEmpleado);
-                if (esEmpleado == false)
+                try
                 {
-                    // Si no es empleado, vuelve a mis reservaciones página
-                    Response.Redirect("~/Pages/MisReservaciones.aspx");
-                    return;
-                }
-                if (!IsPostBack)
-                {
+                    Usuario usuario = (Usuario)Session["Usuario"];
 
-
-                    int idPersona = Convert.ToInt32(usuario.idPersona);
-
-                    using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
+                    bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
+                    if (esEmpleado == false)
                     {
-                        List<SpConsultarGestionReservasionResult> gestion = db.SpConsultarGestionReservasion(idPersona).ToList();
-                        grdGestion.DataSource = gestion;
-                        grdGestion.DataBind();
-
+                        // Si no es empleado, vuelve a mis reservaciones página
+                        Response.Redirect("~/Pages/MisReservaciones.aspx");
+                        return;
                     }
+                    if (!IsPostBack)
+                    {
+
+                        //Muestra los datos de las reservaciones de la base de datos y para el dropdonwlist los clientes
+                        int idPersona = Convert.ToInt32(usuario.idPersona);
+
+                        using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
+                        {
+                            List<SpConsultarGestionReservasionResult> gestion = db.SpConsultarGestionReservasion(idPersona).ToList();
+                            grdGestion.DataSource = gestion;
+                            grdGestion.DataBind();
+
+                            var filtro = db.SpFiltroClientes(idPersona).ToList();
+
+                            ddlCliente.DataValueField = "IdPersona";
+                            ddlCliente.DataTextField = "NombreCompleto";
+                            ddlCliente.DataSource = filtro;
+                            ddlCliente.DataBind();
+
+                            ddlCliente.Items.Insert(0, new ListItem("Seleccione un cliente", "0"));
+                        }
+                    }
+
+
+                }
+                catch
+                {
+
                 }
 
-
             }
-            catch
-            {
-
-            }
-
         }
 
         public String EvaluarEstado(string estado, DateTime fechaEntrada, DateTime fechaSalida)
         {
+            //Evalia el estado de las reservaciones para mostrarlas en la tabla
 
             DateTime fechaActual = DateTime.Now;
             string respuesta = "";
@@ -75,6 +88,19 @@ namespace ProyectoGrupo6.Pages
             if (Page.IsValid)
             {
 
+                int cliente = int.Parse(ddlCliente.SelectedValue);
+
+                DateTime fechaEntrada = DateTime.Parse(txtFechaEntrada.Text);
+                DateTime fechaSalida = DateTime.Parse(txtFechaSalida.Text);
+
+                using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
+                {
+                    List<SpFiltroReservacionesResult> filtro = db.SpFiltroReservaciones(cliente, fechaEntrada, fechaSalida).ToList();
+
+                    grdGestion.DataSource = filtro;
+                    grdGestion.DataBind();
+
+                }
 
             }
 
@@ -84,6 +110,7 @@ namespace ProyectoGrupo6.Pages
         {
             try
             {
+                //comprueba que las fechas sean validas, salida mayor o igual a entrada
                 DateTime entrada = Convert.ToDateTime(txtFechaEntrada.Text);
                 DateTime salida = Convert.ToDateTime(txtFechaSalida.Text);
 

@@ -20,11 +20,11 @@ namespace ProyectoGrupo6.Pages
             try
             {
 
-
                 if (!IsPostBack)
                 {
                     //Los DropDownList necesitan capturar los valores desde la base de datos
                     //estos se llaman con una variable que busca el procedimiento 
+                    Usuario usuario = (Usuario)Session["Usuario"];
 
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                     {
@@ -56,7 +56,7 @@ namespace ProyectoGrupo6.Pages
                         else
                         {
                             // Solo el cliente de la sesión, campo bloqueado
-                            int idPersonaSesion = int.Parse(Session["idPersona"].ToString());
+                            int idPersonaSesion = int.Parse(usuario.idPersona.ToString());
 
                             var clienteSeleccion = clientes.FirstOrDefault(c => c.IdPersona == idPersonaSesion);
                             ddlCliente.Items.Clear();
@@ -82,14 +82,15 @@ namespace ProyectoGrupo6.Pages
                 {  // Hotel hotel = new Hotel();
                    // Reservacion reservacion = new Reservacion();    
 
+                    Usuario usuario = (Usuario)Session["Usuario"];
+                    int idEmpleado = Convert.ToInt32(usuario.idPersona);
+
                     //iniciar los valores en 0 
-                    int idHotel = 0;
-                    int idPersona = 0;
                     int idHabitacion = 0;
 
                     //capturar las id de los dropdown del cliente y hotel
-                    idHotel = int.Parse(ddlHotel.SelectedValue);
-                    idPersona = int.Parse(ddlCliente.SelectedValue);
+                    int idHotel = int.Parse(ddlHotel.SelectedValue);
+                    int idCliente = int.Parse(ddlCliente.SelectedValue);
 
                     //capturar las fechas
                     DateTime fechaEntrada = DateTime.ParseExact(txtFechaEntrada.Text, "yyyy-MM-dd", null);
@@ -119,8 +120,8 @@ namespace ProyectoGrupo6.Pages
 
 
                         //procedimiento es llamado para crear los datos despues de pasar por todas las validaciones 
-                        db.SpCrearReservacion(idPersona, idHabitacion, fechaEntrada, fechaSalida,
-                                            numeroNinhos, numeroAdultos, precioAdul, precioNinh);
+                        db.SpCrearReservacion(idCliente, idHabitacion, fechaEntrada, fechaSalida,
+                                            numeroNinhos, numeroAdultos, precioAdul, precioNinh, idEmpleado);
 
                     }
 
@@ -181,7 +182,8 @@ namespace ProyectoGrupo6.Pages
                     cuvFechaEntrada.ErrorMessage =
                         "Fecha de entrada invalida, debe ser mayor a hoy.";
 
-                }else if (!fechaEntradaV || !fechaSalidaV)
+                }
+                else if (!fechaEntradaV || !fechaSalidaV)
                 {
                     cuvFechaEntrada.ErrorMessage = "Formato de fecha inválido.";
                 }
@@ -199,13 +201,12 @@ namespace ProyectoGrupo6.Pages
             catch { }
         }
 
-     
 
+        //validaciones de las cantidades (este custom valida las cantidades de los campos adulto y niños)
         protected void cuvNumeroAdultos_ServerValidate(object source, ServerValidateEventArgs args)
-        {       //validaciones de las cantidades (este custom valida las cantidades de los campos adulto y niños)
+        {      
             try
-            {
-                //variables inciales
+            { 
                 int numAdultos = 0;
                 int numNinhos = 0;
 
@@ -216,7 +217,7 @@ namespace ProyectoGrupo6.Pages
                 bool adultoValido = int.TryParse(txtNumAdultos.Text, out numAdultos);
                 bool ninhosValido = int.TryParse(txtNumNinos.Text, out numNinhos);
 
-                //suma de huespedes y se pasan al procedimiento
+               
                 int cantidadActual = numAdultos + numNinhos;
 
                 args.IsValid = false;
@@ -224,20 +225,19 @@ namespace ProyectoGrupo6.Pages
                 //llamado de la base para traer los datos de cantidad maxima y la habitacion seleccionada
                 using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                 {
-                    //llamar procedimiento
+                   
                     var cantidades = db.SpObtenerCostosyHabitacion(idHotel, cantidadActual).FirstOrDefault();
 
-                    if (cantidades == null)
+                    if (cantidades == null) //si no hay una habitaciones lanza el mensaje
                     {
-                        //si no hay una habitaciones lanza el mensaje
                         cuvNumeroAdultos.ErrorMessage = "No hay habitaciones disponibles para la cantidad de huespedes";
                         args.IsValid = false;
                         return;
                     }
+
                     //si hay habitaciones disponibles, pasa la cantidad maxima de la habitaciones a la variable
                     int cantidadMaxima = Convert.ToInt32(cantidades.CapacidadMaxima);
 
-                    //comparativa de cantidades para permitir la reservacion
                     if (adultoValido == false || numAdultos <= 0)
                     {
                         cuvNumeroAdultos.ErrorMessage = "Cantidad de adultos no es valida.";
