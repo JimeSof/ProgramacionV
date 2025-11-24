@@ -24,6 +24,15 @@ namespace ProyectoGrupo6
         protected global::System.Web.UI.HtmlControls.HtmlAnchor liGestionar;
 
         /// <summary>
+        /// Control liGestionHabitacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor liGestionHabitacion;
+
+        /// <summary>
         /// Control liMis.
         /// </summary>
         /// <remarks>

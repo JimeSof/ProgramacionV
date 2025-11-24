@@ -30,11 +30,13 @@ namespace ProyectoGrupo6
                     if (esEmpleado == true)
                     {
                         liGestionar.Visible = true;
+                        liGestionHabitacion.Visible = true;
                         liMis.Visible = false;
                     }
                     else
                     {
                         liGestionar.Visible = false;
+                        liGestionHabitacion.Visible = false;
                         liMis.Visible = true;
                     }
 
