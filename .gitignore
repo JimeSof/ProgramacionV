@@ -45,3 +45,5 @@ _ReSharper*/
 
 !/ProyectoGrupo6/Login.aspx
 
+/ProyectoGrupo6/Data/Database.tt
+/ProyectoGrupo6/Data/Database1.generated.cs
