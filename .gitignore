@@ -42,6 +42,8 @@ _ReSharper*/
 
 # Otros
 *.pdb
+*.tt
+*Database1.generated.cs
 
 
 !/ProyectoGrupo6/Login.aspx
