@@ -16,12 +16,12 @@ namespace ProyectoGrupo6.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            try
+            if (!IsPostBack)
             {
-
-                if (!IsPostBack)
+                try
                 {
+
+
                     //Los DropDownList necesitan capturar los valores desde la base de datos
                     //estos se llaman con una variable que busca el procedimiento 
                     Usuario usuario = (Usuario)Session["Usuario"];
@@ -69,10 +69,11 @@ namespace ProyectoGrupo6.Pages
                         }
                     }
                 }
-            }
-            catch { }
-        }
 
+                catch { }
+            }
+        }
+      
         //Realiza el guardado de datos creados por medio del boton
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -204,9 +205,9 @@ namespace ProyectoGrupo6.Pages
 
         //validaciones de las cantidades (este custom valida las cantidades de los campos adulto y niños)
         protected void cuvNumeroAdultos_ServerValidate(object source, ServerValidateEventArgs args)
-        {      
+        {
             try
-            { 
+            {
                 int numAdultos = 0;
                 int numNinhos = 0;
 
@@ -217,7 +218,7 @@ namespace ProyectoGrupo6.Pages
                 bool adultoValido = int.TryParse(txtNumAdultos.Text, out numAdultos);
                 bool ninhosValido = int.TryParse(txtNumNinos.Text, out numNinhos);
 
-               
+
                 int cantidadActual = numAdultos + numNinhos;
 
                 args.IsValid = false;
@@ -225,7 +226,7 @@ namespace ProyectoGrupo6.Pages
                 //llamado de la base para traer los datos de cantidad maxima y la habitacion seleccionada
                 using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                 {
-                   
+
                     var cantidades = db.SpObtenerCostosyHabitacion(idHotel, cantidadActual).FirstOrDefault();
 
                     if (cantidades == null) //si no hay una habitaciones lanza el mensaje
