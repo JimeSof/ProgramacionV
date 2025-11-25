@@ -39,7 +39,7 @@ namespace ProyectoGrupo6.Pages
                         ddlHotel.Items.Insert(0, new ListItem("Seleccione un hotel", ""));
 
                         //obtener clientes
-                        var clientes = db.SpObtenerClientes().ToList();
+                        var clientes = db.SpObtenerCientes().ToList();
 
                         bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
                         if (esEmpleado == true)
@@ -73,7 +73,7 @@ namespace ProyectoGrupo6.Pages
                 catch { }
             }
         }
-      
+
         //Realiza el guardado de datos creados por medio del boton
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -121,21 +121,11 @@ namespace ProyectoGrupo6.Pages
 
 
                         //procedimiento es llamado para crear los datos despues de pasar por todas las validaciones 
-                        db.SpCrearReservacion(
-                                ddlHotel.SelectedItem.Text,               // @nombreHotel
-                                ddlCliente.SelectedItem.Text,             // @nombrePersona
-                                fechaEntrada,                             // @fechaEntrada
-                                fechaSalida,                              // @fechaSalida
-                                numeroNinhos,                             // @numeroNinhos
-                                numeroAdultos,                            // @numeroAdultos
-                                precioAdul,                               // @costoPorCadaAdulto
-                                precioNinh,                               // @costoPorCadaNinho
-                                (precioAdul * numeroAdultos) +
-                                (precioNinh * numeroNinhos)               // @costoTotal
-                            );
+                        db.SpCrearReservacion(idCliente, idHabitacion, fechaEntrada, fechaSalida,
+                                           numeroNinhos, numeroAdultos, precioAdul, precioNinh, idEmpleado);
 
+                    }
 
-                                                }
 
                 }
                 catch { }

@@ -30,7 +30,7 @@ namespace ProyectoGrupo6.Pages
         {
             using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
             {
-                var lista = db.SpConsultarClienteReservacion(idPersona).ToList();
+               var lista = db.SpConsultarClienteReservacion(idPersona).ToList();
                 grdReservaciones.DataSource = lista;
                 grdReservaciones.DataBind();
             }

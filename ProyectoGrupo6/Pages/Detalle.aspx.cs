@@ -16,9 +16,12 @@ namespace ProyectoGrupo6
         {
             try
             {
+                //este load lo que hace es cargar los datos de la reservacion seleccionada
                 Usuario usuario = (Usuario)Session["Usuario"];
                 if (!IsPostBack)
                 {
+                    //se capturan el id enviado por query string y los parametros del usuario
+
                     int id = int.Parse(Request.QueryString["idReservacion"]);
 
 
@@ -28,7 +31,7 @@ namespace ProyectoGrupo6
 
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                     {
-
+                        //se llama a los procedimientos almacenados para obtener los datos de la reservacion y la bitacora
                         var reservacion = db.SpObtenerReservacionById(id, idPersona, esEmpleado).FirstOrDefault();
 
                         List<SpObtenerBitacoraByIdResult> bitacora = db.SpObtenerBitacoraById(id).ToList();
@@ -49,7 +52,7 @@ namespace ProyectoGrupo6
                             Response.Redirect("MisReservaciones.aspx");
                         }
 
-
+                        // lógica para mostrar u ocultar botones según el estado de la reservación y el tipo de usuario
                         if (esEmpleado == true)
                         {
                             btnEditar.Visible = (Convert.ToString(reservacion.Estado) == "A" && reservacion.FechaSalida > DateTime.Now);
@@ -77,7 +80,7 @@ namespace ProyectoGrupo6
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
-        {
+        {//redirecciona a la pagina de editar reservacion enviando el id por query string
             try
             {
                 string id = Request.QueryString["idReservacion"];
@@ -88,6 +91,7 @@ namespace ProyectoGrupo6
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
+            //redirecciona a la pagina correspondiente segun el tipo de usuario
             bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
 
             if (esEmpleado == true)
@@ -101,11 +105,12 @@ namespace ProyectoGrupo6
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
-        {
+        { //llama al procedimiento almacenado para cancelar la reservacion
             try
             {
                 int idReservacion = int.Parse(Request.QueryString["idReservacion"]);
                 Usuario usuario = (Usuario)Session["Usuario"];
+
 
                 using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                 {
@@ -114,7 +119,19 @@ namespace ProyectoGrupo6
 
                 // mensaje al usuario
                 ScriptManager.RegisterStartupScript(this, GetType(), "alert",
-                    "alert('¡Reservación cancelada correctamente!'); window.location='MisReservaciones.aspx';", true);
+                    "alert('¡Reservación cancelada correctamente!');", true);
+
+                //redirecciona a la pagina correspondiente segun el tipo de usuario
+                bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
+
+                if (esEmpleado == true)
+                {
+                    Response.Redirect("GestionarReservaciones.aspx");
+                }
+                else
+                {
+                    Response.Redirect("MisReservaciones.aspx");
+                }
             }
             catch
             {

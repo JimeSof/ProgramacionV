@@ -13,5 +13,6 @@ namespace ProyectoGrupo6.Classes
 
         public int? idPersona { get; set; }
         public bool? esEmpleado {  get; set; }
+        public int? acceso { get; set; }
     }
 }
