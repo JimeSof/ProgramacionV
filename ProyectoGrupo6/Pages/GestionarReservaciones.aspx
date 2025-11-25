@@ -2,7 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <link rel="stylesheet" href="../Content/Estilos.css" />
 
     <h1 style="font-family: Arial, Helvetica, sans-serif">Gestionar Reservaciones</h1>
 
