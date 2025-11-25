@@ -39,7 +39,7 @@ namespace ProyectoGrupo6.Pages
                         ddlHotel.Items.Insert(0, new ListItem("Seleccione un hotel", ""));
 
                         //obtener clientes
-                        var clientes = db.SpObtenerCientes().ToList();
+                        var clientes = db.SpObtenerClientes().ToList();
 
                         bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
                         if (esEmpleado == true)
@@ -121,10 +121,21 @@ namespace ProyectoGrupo6.Pages
 
 
                         //procedimiento es llamado para crear los datos despues de pasar por todas las validaciones 
-                        db.SpCrearReservacion(idCliente, idHabitacion, fechaEntrada, fechaSalida,
-                                            numeroNinhos, numeroAdultos, precioAdul, precioNinh, idEmpleado);
+                        db.SpCrearReservacion(
+                                ddlHotel.SelectedItem.Text,               // @nombreHotel
+                                ddlCliente.SelectedItem.Text,             // @nombrePersona
+                                fechaEntrada,                             // @fechaEntrada
+                                fechaSalida,                              // @fechaSalida
+                                numeroNinhos,                             // @numeroNinhos
+                                numeroAdultos,                            // @numeroAdultos
+                                precioAdul,                               // @costoPorCadaAdulto
+                                precioNinh,                               // @costoPorCadaNinho
+                                (precioAdul * numeroAdultos) +
+                                (precioNinh * numeroNinhos)               // @costoTotal
+                            );
 
-                    }
+
+                                                }
 
                 }
                 catch { }

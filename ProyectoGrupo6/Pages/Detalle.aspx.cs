@@ -102,7 +102,25 @@ namespace ProyectoGrupo6
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            //edu
+            try
+            {
+                int idReservacion = int.Parse(Request.QueryString["idReservacion"]);
+                Usuario usuario = (Usuario)Session["Usuario"];
+
+                using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
+                {
+                    db.SpCancelarReservacion(idReservacion, usuario.idPersona.Value);
+                }
+
+                // mensaje al usuario
+                ScriptManager.RegisterStartupScript(this, GetType(), "alert",
+                    "alert('¡Reservación cancelada correctamente!'); window.location='MisReservaciones.aspx';", true);
+            }
+            catch
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                    "alert('Error al cancelar la reservación.');", true);
+            }
         }
     }
 }
