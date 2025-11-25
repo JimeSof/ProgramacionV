@@ -81,7 +81,7 @@ namespace ProyectoGrupo6
             try
             {
                 string id = Request.QueryString["idReservacion"];
-                Response.Redirect("EditarReservacion.aspx");
+                Response.Redirect("EditarReservacion.aspx?idReservacion=" + id);
             }
             catch { }
         }

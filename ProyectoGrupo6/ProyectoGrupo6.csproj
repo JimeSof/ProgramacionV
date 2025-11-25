@@ -256,18 +256,16 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Estilos.css" />
-    <Content Include="Content\Style.css" />
     <Content Include="DATA\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database1.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Default.aspx" />
-    <Content Include="Imagen\hotel.png" />
+    <Content Include="Imagen\LogoHotel.png" />
     <Content Include="Login.aspx" />
     <Content Include="Pages\Detalle.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Imagen\Logo.png" />
     <Content Include="LinqToDB.Templates\CopyMe.SqlServer.tt.txt" />
     <Content Include="Pages\CrearReservacion.aspx" />
     <Content Include="Pages\EditarReservacion.aspx" />

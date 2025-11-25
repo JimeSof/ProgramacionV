@@ -1,15 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CrearReservacion.aspx.cs" Inherits="ProyectoGrupo6.Pages.CrearReservacion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+     <link rel="stylesheet" href="../Content/Estilos.css" />
 
     <h1 style="color: #1750BA; font-family: Arial; font-weight: bold">Crear reservación</h1>
 
     <div class="container">
 
-
         <div>
             <span style="color: #1750BA; font-family: Arial;">Hotel:</span>
-            <asp:DropDownList ID="ddlHotel" runat="server" CssClass="form-select"></asp:DropDownList>
+            <asp:DropDownList ID="ddlHotel" runat="server" CssClass="form-select w-100"></asp:DropDownList>
             <!--Validaciones-->
             <asp:RequiredFieldValidator ID="rfvHotel" runat="server" InitialValue="" ControlToValidate="ddlHotel"
                 ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -18,7 +18,7 @@
 
         <div>
             <span style="color: #1750BA; font-family: Arial;">Cliente:</span>
-            <asp:DropDownList ID="ddlCliente" runat="server" CssClass="form-select"></asp:DropDownList>
+            <asp:DropDownList ID="ddlCliente" runat="server" CssClass="form-select w-100"></asp:DropDownList>
             <!--Validaciones-->
             <asp:RequiredFieldValidator ID="rfvCliente" runat="server" InitialValue="" ControlToValidate="ddlCliente"
                 ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-3">
                 <label style="color: #1750BA;">Fecha Entrada:</label>
-                <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control w-100" TextMode="Date"></asp:TextBox>
                 <!--Validaciones-->
                 <asp:RequiredFieldValidator ID="rfvFechEntrada" runat="server" InitialValue="" ControlToValidate="txtFechaEntrada"
                     ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -39,7 +39,7 @@
 
             <div class="col-3">
                 <label style="color: #1750BA;">Fecha Salida:</label>
-                <asp:TextBox ID="txtFechaSalida" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                <asp:TextBox ID="txtFechaSalida" runat="server" CssClass="form-control w-100" TextMode="Date"></asp:TextBox>
                 <!--Validaciones-->
                 <asp:RequiredFieldValidator ID="rfvFechaSalida" runat="server" InitialValue="" ControlToValidate="txtFechaSalida"
                     ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>

@@ -42,9 +42,12 @@ _ReSharper*/
 
 # Otros
 *.pdb
+
+# Linq2DB T4 generation files
+*.generated.cs
 *.tt
-*Database1.generated.cs
 *.ttinclude
+*.linq2db
 
 !/ProyectoGrupo6/Login.aspx
 
