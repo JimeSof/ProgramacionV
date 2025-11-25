@@ -30,16 +30,23 @@
                             <div class="row">
                                 <asp:Label ID="lblEmail" runat="server" Text="Email"></asp:Label>
                                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form_input" placeholder="xxxx@sitio.com"></asp:TextBox>
-
+                                <!--Validaciones-->
+                                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtEmail"></asp:RequiredFieldValidator><br />
+                                <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="El formato del email no es valido"
+                                    ValidationExpression="[^@\s]+@[^@\s]+\.[^@\s]+$" ControlToValidate="txtEmail" ForeColor="Red"></asp:RegularExpressionValidator>
                             </div>
                             <div class="row">
 
                                 <asp:Label ID="lblClave" runat="server" Text="Clave"></asp:Label>
                                 <asp:TextBox ID="txtClave" runat="server" CssClass="form_input"></asp:TextBox>
+                                <!--Validaciones-->
+                                <asp:RequiredFieldValidator ID="rfvClave" runat="server" ErrorMessage="Este campo es requerido" ControlToValidate="txtClave" ForeColor="Red"></asp:RequiredFieldValidator>
                             </div>
-
+                            <!--Validaciones-->
+                            <asp:Label ID="lblMensaje" runat="server" Text="" ForeColor="Red" Font-Bold="true" Visible="false"></asp:Label>
+                            
                             <div class="row">
-                                <asp:Button ID="btnValidar" runat="server" Text="Iniciar Sesión" OnClick="btnValidar_Click" CssClass="btn_log"/>
+                                <asp:Button ID="btnValidar" runat="server" Text="Iniciar Sesión" OnClick="btnValidar_Click" CssClass="btn_log" />
                             </div>
                         </form>
                     </div>

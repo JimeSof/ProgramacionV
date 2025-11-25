@@ -4,8 +4,6 @@ CSS DE LOGIN
 
 */
 
-
-
 .main-content {
     width: 50%;
     border-radius: 20px;
@@ -16,7 +14,7 @@ CSS DE LOGIN
 }
 
 .company__info {
-    background-color: #6b1433;
+    background-color: #7c173b;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     display: flex;
@@ -53,7 +51,7 @@ CSS DE LOGIN
 }
 
 .row > h2 {
-    color: #4A0E23;
+    color: #7c173b;
 }
 
 .login_form {
@@ -86,7 +84,7 @@ form {
 }
 
     .form_input:focus {
-        border-bottom-color: #6b1433;
+        border-bottom-color: #7c173b;
         box-shadow: 0 0 5px rgba(0,80,80,.4);
         border-radius: 4px;
     }
@@ -95,10 +93,10 @@ form {
     transition: all .5s ease;
     width: 70%;
     border-radius: 30px;
-    color: #6b1433;
+    color: #7c173b;
     font-weight: 600;
     background-color: #fff;
-    border: 1px solid #6b1433;
+    border: 1px solid #7c173b;
     margin-top: 1.5em;
     margin-bottom: 1em;
     width: 80%;
@@ -108,7 +106,7 @@ form {
 }
 
     .btn_log:hover, .btn_log:focus {
-        background-color: #6b1433;
+        background-color: #7c173b;
         color: #fff;
     }
 

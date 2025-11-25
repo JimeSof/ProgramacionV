@@ -92,7 +92,7 @@ se establece el orden descendente y que cumpla con la consigna de no mostrar las
 del Cliente que realiza el login
 */
 
-CREATE PROCEDURE [dbo].[spConsultarClienteReserva] 
+CREATE PROCEDURE [dbo].[spConsultarClienteReservacion] 
   @IdPersona INT
 AS
 BEGIN
@@ -394,3 +394,38 @@ BEGIN
         Order by r.idReservacion DESC;
 END
 GO
+
+/*PROCEDIMIENTO PARA CANCELAR LAS RESERVACIONES*/
+
+CREATE PROCEDURE [dbo].[spCancelarReservacion]
+    @idReservacion INT,
+    @idEmpleado int
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @idHabitacion INT;
+
+    -- Obtener habitación asociada
+    SELECT @idHabitacion = idHabitacion
+    FROM Reservacion
+    WHERE idReservacion = @idReservacion;
+
+    -- Cancelar la reservación
+    UPDATE Reservacion
+    SET estado = 'I'
+    WHERE idReservacion = @idReservacion;
+
+    -- Liberar la habitación
+    UPDATE Habitacion
+    SET estado = 'A'
+    WHERE idHabitacion = @idHabitacion;
+
+    -- Insertar en bitácora
+    INSERT INTO Bitacora(idReservacion, idPersona, accionRealizada, fechaDeLaAccion)
+    VALUES(@idReservacion, @idEmpleado, 'CANCELADA', GETDATE());
+
+END
+GO
+
+/**/
