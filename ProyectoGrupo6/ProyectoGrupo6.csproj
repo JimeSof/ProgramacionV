@@ -257,10 +257,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Estilos.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="DATA\Database.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Database1.generated.cs</LastGenOutput>
-    </Content>
+    <Content Include="DATA\CopyMe.SqlServer.tt.txt" />
     <Content Include="Default.aspx" />
     <Content Include="Imagen\LogoHotel.png" />
     <Content Include="Login.aspx" />
@@ -369,11 +366,6 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DATA\Database1.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
