@@ -14,7 +14,6 @@
     </asp:PlaceHolder>
 
     <webopt:BundleReference runat="server" Path="~/Content/css" />
-    <link href="Content/bootstrap.min.css" rel="stylesheet" />
 
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
@@ -70,9 +69,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <asp:LinkButton ID="lbtnCerrar" runat="server" OnClick="lbtnCerrar_Click" CssClass="nav-link" CausesValidation="false">Cerrar Sesión</asp:LinkButton></li>
-                        <!--editar este ultimo li-->
-
+                            <asp:LinkButton ID="lbtnCerrar" runat="server" OnClick="lbtnCerrar_Click" CssClass="nav-link" CausesValidation="false"  OnClientClick="return confirm('¿Desea cerrar sesión?');">Cerrar Sesión</asp:LinkButton></li>
                     </ul>
 
                 </div>

@@ -4,13 +4,14 @@ CSS DE LOGIN
 
 */
 
-.main-content {
+.login-page .main-content {
     width: 50%;
     border-radius: 20px;
     box-shadow: 0 5px 5px rgba(0,0,0,.4);
     margin: 5em auto;
     display: flex;
-    overflow: hidden; /* evita que sobresalga algo */
+ 
+   
 }
 
 .company__info {
@@ -64,11 +65,6 @@ CSS DE LOGIN
     padding: 2em 1em; 
 }
 
-
-
-form {
-    padding: 0 1em;
-}
 
 .form_input {
     width: 100%;
@@ -147,10 +143,6 @@ form {
     display: flex;
     gap: 17px;
 }
-
-
-
-
 
 
 

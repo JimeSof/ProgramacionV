@@ -29,10 +29,12 @@
         <div class="col-3">
             <asp:Label ID="lblFechaEntrada" runat="server" Text="Fecha de entrada"></asp:Label>
             <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+            <!--Validaciones-->
         </div>
         <div class="col-3">
             <asp:Label ID="lblFechaSalida" runat="server" Text="Fecha de salida"></asp:Label>
             <asp:TextBox ID="txtFechaSalida" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+            <!--Validaciones-->
         </div>
     </div>
 
@@ -40,16 +42,20 @@
         <div class="col-3">
             <asp:Label ID="lblNumeroAdultos" runat="server" Text="Número de adultos"></asp:Label>
             <asp:TextBox ID="txtNumeroAdultos" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+            <!--Validaciones-->
         </div>
         <div class="col-3">
             <asp:Label ID="lblNumeroNinhos" runat="server" Text="Número de niños"></asp:Label>
             <asp:TextBox ID="txtNumeroNinhos" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+            <!--Validaciones-->
         </div>
 
         <br />
+        
+        <br />
         <div>
             <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="btnGuardar_Click" />
-            <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-outline-dark" OnClick="btnRegresar_Click" />
+            <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-outline-secondary" OnClick="btnRegresar_Click" CausesValidation="False"/>
         </div>
 
     </div>

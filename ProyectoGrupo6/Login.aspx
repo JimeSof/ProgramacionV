@@ -6,9 +6,10 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../Content/Estilos.css" />
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/andika" type="text/css"/>
     <title></title>
 </head>
-<body>
+<body class="login-page">
 
     <!-- Main Content -->
     <div class="container-fluid">

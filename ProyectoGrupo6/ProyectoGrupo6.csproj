@@ -256,6 +256,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Estilos.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="DATA\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database1.generated.cs</LastGenOutput>

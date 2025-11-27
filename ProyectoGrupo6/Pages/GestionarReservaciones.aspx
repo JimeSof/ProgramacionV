@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GestionarReservaciones.aspx.cs" Inherits="ProyectoGrupo6.Pages.GestionarReservaciones" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
+        <link rel="stylesheet" href="../Content/Estilos.css" />
 
     <h1 style="font-family: Arial, Helvetica, sans-serif">Gestionar Reservaciones</h1>
 
@@ -33,6 +33,7 @@
         <asp:CustomValidator ID="cuvFechas" runat="server" ErrorMessage="Fechas invalidas: Fecha de salida debe ser mayor a la fecha de entrada"
                 OnServerValidate="cuvFechas_ServerValidate" ForeColor="Red" Display="Dynamic"></asp:CustomValidator>
     </div>
+
     <div>
         <a href="CrearReservacion.aspx" class="btn btn-primary" role="button">Nuevo reservación</a>
     </div>
@@ -57,7 +58,7 @@
             <asp:BoundField DataField="fechaSalida" HeaderText="Fecha salida" DataFormatString="{0:d}"
                 HeaderStyle-CssClass="text-center" ItemStyle-HorizontalAlign="Center" />
 
-            <asp:BoundField DataField="costoTotal" HeaderText="Costo" DataFormatString="{0:C2}"
+            <asp:BoundField DataField="costoTotal" HeaderText="Costo" DataFormatString="${0:N2}"
                 HeaderStyle-CssClass="text-end" ItemStyle-HorizontalAlign="Right" />
 
             <asp:TemplateField HeaderText="Estado" HeaderStyle-CssClass="text-center" ItemStyle-HorizontalAlign="Center">

@@ -42,6 +42,7 @@ _ReSharper*/
 
 # Otros
 *.pdb
+*/web.config
 
 # Linq2DB T4 generation files
 *.generated.cs

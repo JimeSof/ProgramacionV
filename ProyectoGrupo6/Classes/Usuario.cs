@@ -8,8 +8,6 @@ namespace ProyectoGrupo6.Classes
     public class Usuario
     {
         public string nombreCompleto { get; set; }
-        public string clave {  get; set; }
-        public string email { get; set; }
 
         public int? idPersona { get; set; }
         public bool? esEmpleado {  get; set; }

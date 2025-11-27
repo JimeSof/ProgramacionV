@@ -18,7 +18,7 @@
             <asp:BoundField DataField="totalDiasReservacion" HeaderText="Días de la reserva" />
             <asp:BoundField DataField="numeroAdultos" HeaderText="Número de adultos" />
             <asp:BoundField DataField="numeroNinhos" HeaderText="Número de niños" />
-            <asp:BoundField DataField="costoTotal" HeaderText="Costo Total" />
+            <asp:BoundField DataField="costoTotal" HeaderText="Costo Total" DataFormatString="${0:N2}" />
 
         </Fields>
     </asp:DetailsView>
