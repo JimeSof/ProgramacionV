@@ -1,9 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GestionarReservaciones.aspx.cs" Inherits="ProyectoGrupo6.Pages.GestionarReservaciones" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-        <link rel="stylesheet" href="../Content/Estilos.css" />
+    <link rel="stylesheet" href="../Content/Estilos.css" />
 
-    <h1 style="font-family: Arial, Helvetica, sans-serif">Gestionar Reservaciones</h1>
+    <div class="titulo">
+        <div class="izquierda">
+            <h1>Gestionar Reservaciones</h1>
+        </div>
+        <div class="derecha">
+            <asp:Label ID="lblUsuario" runat="server" Text="Usuario" Font-Bold="True"></asp:Label>
+        </div>
+    </div>
 
     <!--El filtro de busqueda-->
     <div id="flitro" class="row">
@@ -16,7 +23,7 @@
             <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
             <!--Validaciones-->
             <asp:RequiredFieldValidator ID="rfvFechaEntrada" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtFechaEntrada"></asp:RequiredFieldValidator>
-           
+
         </div>
         <div class="col-3">
             <asp:Label ID="lbFechaSalida" runat="server" Text="Fecha Salida"></asp:Label>
@@ -27,11 +34,11 @@
         <div class="col-3">
             <br />
             <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" CssClass="btn btn-outline-dark" />
-        </div> 
+        </div>
 
         <!--Validacion de los campos de fecha-->
         <asp:CustomValidator ID="cuvFechas" runat="server" ErrorMessage="Fechas invalidas: Fecha de salida debe ser mayor a la fecha de entrada"
-                OnServerValidate="cuvFechas_ServerValidate" ForeColor="Red" Display="Dynamic"></asp:CustomValidator>
+            OnServerValidate="cuvFechas_ServerValidate" ForeColor="Red" Display="Dynamic"></asp:CustomValidator>
     </div>
 
     <div>
