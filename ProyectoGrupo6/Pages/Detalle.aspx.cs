@@ -1,12 +1,8 @@
 ﻿using DataModels;
 using ProyectoGrupo6.Classes;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using static DataModels.PvProyectoFinalDBStoredProcedures;
 
 namespace ProyectoGrupo6
 {
@@ -17,87 +13,64 @@ namespace ProyectoGrupo6
             try
             {
                 Usuario usuario = (Usuario)Session["Usuario"];
+
                 if (!IsPostBack)
                 {
-                    int id = int.Parse(Request.QueryString["idReservacion"]);
+                    if (!int.TryParse(Request.QueryString["idReservacion"], out int idReservacion))
+                    {
+                        Response.Redirect("MisReservaciones.aspx");
+                        return;
+                    }
 
-
-                    int idPersona = int.Parse(usuario.idPersona.ToString());
+                    int idPersona = usuario.idPersona.Value;
                     bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
-
 
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                     {
+                        var reservacion = db.SpObtenerReservacionById(idReservacion, idPersona, esEmpleado).FirstOrDefault();
+                        var bitacora = db.SpObtenerBitacoraById(idReservacion).ToList();
 
-                        var reservacion = db.SpObtenerReservacionById(id, idPersona, esEmpleado).FirstOrDefault();
-
-                        List<SpObtenerBitacoraByIdResult> bitacora = db.SpObtenerBitacoraById(id).ToList();
-
-                        if (reservacion != null)
+                        if (reservacion == null)
                         {
-
-                            dvDetalle.DataSource = new List<SpObtenerReservacionByIdResult> { reservacion };
-                            dvDetalle.DataBind();
-
-                            grdBitacora.DataSource = bitacora;
-                            grdBitacora.DataBind();
-
-                        }
-                        else
-                        {
-                            // Si no devolvió nada, significa que el usuario no tiene acceso a esa reserva
                             Response.Redirect("MisReservaciones.aspx");
+                            return;
                         }
 
+                        // Mostrar detalle y bitácora
+                        dvDetalle.DataSource = new[] { reservacion };
+                        dvDetalle.DataBind();
 
-                        if (esEmpleado == true)
-                        {
-                            btnEditar.Visible = (Convert.ToString(reservacion.Estado) == "A" && reservacion.FechaSalida > DateTime.Now);
+                        grdBitacora.DataSource = bitacora;
+                        grdBitacora.DataBind();
 
-                        }
+                        // Reglas RF-004 y RF-005
+                        DateTime hoy = DateTime.Now;
+
+                        bool estaCancelada = reservacion.Estado == 'I';
+                        bool finalizada = reservacion.FechaSalida <= hoy;
+                        bool enProceso = reservacion.FechaEntrada <= hoy && reservacion.FechaSalida > hoy;
+
+                        // EDITAR
+                        if (esEmpleado)
+                            btnEditar.Visible = (!estaCancelada && !finalizada);
                         else
-                        {
-                            btnEditar.Visible = (Convert.ToString(reservacion.Estado) == "A" && reservacion.FechaEntrada > DateTime.Now);
+                            btnEditar.Visible = (!estaCancelada && !finalizada && !enProceso);
 
-                        }
-
-                        if (Convert.ToString(reservacion.Estado) == "A" && reservacion.FechaEntrada > DateTime.Now)
-                        {
-                            btnCancelar.Visible = true;
-                        }
-
+                        // CANCELAR
+                        if (esEmpleado)
+                            btnCancelar.Visible = (!estaCancelada && !finalizada);
+                        else
+                            btnCancelar.Visible = (!estaCancelada && !finalizada && !enProceso);
                     }
-
                 }
-            }
-            catch
-            {
-
-            }
-        }
-
-        protected void btnEditar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string id = Request.QueryString["idReservacion"];
-                Response.Redirect("EditarReservacion.aspx");
             }
             catch { }
         }
 
-        protected void btnRegresar_Click(object sender, EventArgs e)
+        protected void btnEditar_Click(object sender, EventArgs e)
         {
-            bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
-
-            if (esEmpleado == true)
-            {
-                Response.Redirect("GestionarReservaciones.aspx");
-            }
-            else
-            {
-                Response.Redirect("MisReservaciones.aspx");
-            }
+            string id = Request.QueryString["idReservacion"];
+            Response.Redirect("EditarReservacion.aspx?id=" + id);
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
@@ -112,15 +85,24 @@ namespace ProyectoGrupo6
                     db.SpCancelarReservacion(idReservacion, usuario.idPersona.Value);
                 }
 
-                // mensaje al usuario
                 ScriptManager.RegisterStartupScript(this, GetType(), "alert",
-                    "alert('¡Reservación cancelada correctamente!'); window.location='MisReservaciones.aspx';", true);
+                    "alert('¡Reservación cancelada exitosamente!'); window.location='MisReservaciones.aspx';", true);
             }
             catch
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "error",
+                ScriptManager.RegisterStartupScript(this, GetType(), "alert",
                     "alert('Error al cancelar la reservación.');", true);
             }
+        }
+
+        protected void btnRegresar_Click(object sender, EventArgs e)
+        {
+            bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
+
+            if (esEmpleado)
+                Response.Redirect("GestionarReservaciones.aspx");
+            else
+                Response.Redirect("MisReservaciones.aspx");
         }
     }
 }
