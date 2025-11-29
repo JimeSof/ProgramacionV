@@ -1,11 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GestionarReservaciones.aspx.cs" Inherits="ProyectoGrupo6.Pages.GestionarReservaciones" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <link rel="stylesheet" href="../Content/Estilos.css" />
 
     <div class="titulo">
         <div class="izquierda">
-            <h1>Gestionar Reservaciones</h1>
+            <h1 class="">Gestionar Reservaciones</h1>
         </div>
         <div class="derecha">
             <asp:Label ID="lblUsuario" runat="server" Text="Usuario" Font-Bold="True"></asp:Label>
@@ -42,9 +41,8 @@
     </div>
 
     <div>
-        <a href="CrearReservacion.aspx" class="btn btn-primary" role="button">Nuevo reservación</a>
+        <a href="CrearReservacion.aspx" class="btn btn_cr" role="button">Nuevo reservación</a>
     </div>
-    <br />
 
     <!--GridView para visualizar los datos de la tabla para gestionar las reservaciones-->
     <asp:GridView ID="grdGestion" runat="server" AutoGenerateColumns="false" CssClass="rgrid table table-bordered table-hover"

@@ -2,8 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <link rel="stylesheet" href="../Content/Estilos.css" />
-
     <h1>Detalle de la reservación</h1>
     <br />
 

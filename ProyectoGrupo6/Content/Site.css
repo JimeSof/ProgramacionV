@@ -1,21 +1,221 @@
-﻿/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
+﻿
+/*
+CSS DE LOGIN
+
+*/
+
 .body-content {
-    margin-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-    max-width: 280px;
+.login-page .main-content {
+    width: 50%;
+    border-radius: 20px;
+    box-shadow: 0 5px 5px rgba(0,0,0,.4);
+    margin: 5em auto;
+    display: flex;
+    overflow: hidden;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .body-content {
-        padding: 0;
+.labelLog {
+    font-family: 'Georgia', serif;
+    font-size: 17px;
+    font-weight: bold;
+    color: #2c3e50;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.company__info {
+    background-color: #7c173b;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    flex: 1;
+    align-items: center;
+    color: #fff;
+    padding: 2em 1em;
+}
+
+
+
+@media screen and (max-width: 640px) {
+    .main-content {
+        width: 90%;
+    }
+
+    .company__info {
+        display: none;
+    }
+
+    .login_form {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
     }
 }
+
+@media screen and (min-width: 642px) and (max-width:800px) {
+    .main-content {
+        width: 70%;
+    }
+}
+
+.row > h2 {
+    color: #7c173b;
+}
+
+.login_form {
+    background-color: #fff;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    flex: 2;
+    padding: 2em 1em;
+}
+
+
+.form_input {
+    width: 100%;
+    height: 3em;
+    border: 0px solid transparent;
+    border-radius: 0;
+    border-bottom: 1px solid #aaa;
+    padding: 1em .5em .5em;
+    padding-left: 2em;
+    outline: none;
+    margin: 1.5em auto;
+    transition: all .5s ease;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 14px;
+}
+
+    .form_input:focus {
+        border-bottom-color: #7c173b;
+        box-shadow: 0 0 5px rgba(0,80,80,.4);
+        border-radius: 4px;
+    }
+
+.btn_log {
+    transition: all .5s ease;
+    width: 70%;
+    border-radius: 30px;
+    color: #7c173b;
+    font-weight: 600;
+    background-color: #fff;
+    border: 1px solid #7c173b;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    width: 80%;
+    padding: 12px 18px;
+    font-size: 1rem;
+    border-radius: 30px;
+}
+
+    .btn_log:hover, .btn_log:focus {
+        background-color: #7c173b;
+        color: #fff;
+    }
+
+/*
+    FIN DEL CSS DEL LOGIN
+
+    CSS DE GESTION DE RESERVACIONES
+*/
+
+.rgrid tr:nth-child(even) {
+    background-color: #eee;
+    color: black;
+}
+
+.rgrid tr:nth-child(odd) {
+    background-color: #fff;
+    color: black;
+}
+
+.rgrid-header {
+    background-color: #d4d4d4 !important;
+    color: white;
+    font-weight: bold;
+}
+
+
+.dvdetail tr td:first-child {
+    background-color: #eee !important;
+    color: black !important;
+    font-weight: bold;
+    width: 100px !important;
+}
+
+.dvdetail td:nth-child(2) {
+    width: 200px !important;
+}
+
+.cajabtn {
+    display: flex;
+    gap: 17px;
+}
+
+
+.btn_cr {
+    transition: all .5s ease;
+    color: #fff;
+    font-weight: 600;
+    background-color: #7c173b;
+    border: 1px solid #7c173b;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    width: auto;
+}
+
+    .btn_cr:hover, .btn_cr:focus {
+        background-color: #ae2053;
+        color: #fff;
+    }
+
+/*CSS DE USUARIO Y TITULO*/
+
+.titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.izquierda {
+    text-align: left; /* texto quede a la izquierda */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.derecha {
+    text-align: right; /* texto quede a la derecha */
+    font-family: "Quicksand", sans-serif;
+    font-size: 20px;
+    color: #3b0b1c;
+}
+
+
+h1, .h1 {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 38px;
+}
+

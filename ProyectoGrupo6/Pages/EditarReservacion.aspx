@@ -34,7 +34,7 @@
             <asp:Label ID="lblFechaEntrada" runat="server" Text="Fecha de entrada"></asp:Label>
             <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
             <!--Validaciones-->
-      ESTE ES EL VALIDATOR      <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
+      ESTE ES EL VALIDATOR      <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtFechaEntrada"></asp:RequiredFieldValidator>
 
         </div>
         <div class="col-3">

@@ -1,10 +1,12 @@
 ﻿using DataModels;
+using LinqToDB;
 using ProyectoGrupo6.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Caching;
 using System.Web.UI;
+using static LinqToDB.Common.Configuration;
 
 namespace ProyectoGrupo6.Pages
 {
@@ -24,6 +26,7 @@ namespace ProyectoGrupo6.Pages
 
                     CargarDatos(usuario, esEmpleado);
 
+                    
                 }
                 catch { }
 
@@ -45,7 +48,20 @@ namespace ProyectoGrupo6.Pages
 
                 //verifica si la reservacion esta inactiva o si la fecha de salida ya paso o si la fecha de entrada es hoy o ya paso y el usuario no es empleado
                 //en ese caso redirige segun el tipo de usuario y buscar entrar por url
-                if (data.Estado == 'I' || data.FechaSalida <= hoy || (data.FechaEntrada <= hoy && data.FechaSalida > hoy && !esEmpleado))
+                if (data == null)
+                {
+                    RedirigirSegunUsuario(esEmpleado);
+                    return;
+
+                }
+                //verifica si el usuario es empleado o si la reservacion pertenece al usuario
+                if (!esEmpleado && data.IdPersona != usuario.idPersona )
+                {
+                    Response.Redirect("MisReservaciones.aspx");
+                    return;
+                }
+
+                if (data.Estado == 'I' || data.FechaSalida <= hoy || (data.FechaEntrada <= hoy && data.FechaSalida > hoy))
                 {
                     RedirigirSegunUsuario(esEmpleado);
                     return;
