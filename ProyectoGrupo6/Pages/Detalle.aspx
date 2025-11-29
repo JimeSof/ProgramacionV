@@ -2,8 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <link rel="stylesheet" href="../Content/Estilos.css" />
-
     <h1>Detalle de la reservación</h1>
     <br />
 
@@ -18,7 +16,7 @@
             <asp:BoundField DataField="totalDiasReservacion" HeaderText="Días de la reserva" />
             <asp:BoundField DataField="numeroAdultos" HeaderText="Número de adultos" />
             <asp:BoundField DataField="numeroNinhos" HeaderText="Número de niños" />
-            <asp:BoundField DataField="costoTotal" HeaderText="Costo Total" />
+            <asp:BoundField DataField="costoTotal" HeaderText="Costo Total" DataFormatString="${0:N2}" />
 
         </Fields>
     </asp:DetailsView>

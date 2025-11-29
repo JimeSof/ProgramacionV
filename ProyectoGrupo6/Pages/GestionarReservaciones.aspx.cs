@@ -23,6 +23,8 @@ namespace ProyectoGrupo6.Pages
                 {
                     Usuario usuario = (Usuario)Session["Usuario"];
 
+                    lblUsuario.Text = usuario.nombreCompleto;
+
                     bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
                     if (esEmpleado == false)
                     {

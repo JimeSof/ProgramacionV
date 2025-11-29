@@ -135,6 +135,7 @@ AS
 BEGIN
 SELECT TOP 1
               r.idReservacion,
+               r.idPersona,
                h.nombre as hotel, 
                hb.numeroHabitacion,
                p.nombreCompleto as cliente,

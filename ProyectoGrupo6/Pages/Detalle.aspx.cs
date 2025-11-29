@@ -24,7 +24,6 @@ namespace ProyectoGrupo6
 
                     int id = int.Parse(Request.QueryString["idReservacion"]);
 
-
                     int idPersona = int.Parse(usuario.idPersona.ToString());
                     bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
 
@@ -56,12 +55,10 @@ namespace ProyectoGrupo6
                         if (esEmpleado == true)
                         {
                             btnEditar.Visible = (Convert.ToString(reservacion.Estado) == "A" && reservacion.FechaSalida > DateTime.Now);
-
                         }
                         else
                         {
                             btnEditar.Visible = (Convert.ToString(reservacion.Estado) == "A" && reservacion.FechaEntrada > DateTime.Now);
-
                         }
 
                         if (Convert.ToString(reservacion.Estado) == "A" && reservacion.FechaEntrada > DateTime.Now)

@@ -5,10 +5,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="../Content/Estilos.css" />
+    <link rel="stylesheet" href="../Content/Site.css" />
+
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/andika" type="text/css"/>
+
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet"/>
     <title></title>
 </head>
-<body>
+<body class="login-page">
 
     <!-- Main Content -->
     <div class="container-fluid">
@@ -28,19 +34,20 @@
                     <div class="row">
                         <form control="" class="form-group" runat="server">
                             <div class="row">
-                                <asp:Label ID="lblEmail" runat="server" Text="Email"></asp:Label>
+                                <asp:Label ID="lblEmail" runat="server" Text="Email" CssClass="labelLog"></asp:Label>
                                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form_input" placeholder="xxxx@sitio.com"></asp:TextBox>
                                 <!--Validaciones-->
-                                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtEmail"></asp:RequiredFieldValidator><br />
+                                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Este campo es requerido" ForeColor="#d11212" ControlToValidate="txtEmail"></asp:RequiredFieldValidator><br />
                                 <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="El formato del email no es valido"
-                                    ValidationExpression="[^@\s]+@[^@\s]+\.[^@\s]+$" ControlToValidate="txtEmail" ForeColor="Red"></asp:RegularExpressionValidator>
+                                    ValidationExpression="[^@\s]+@[^@\s]+\.[^@\s]+$" ControlToValidate="txtEmail" ForeColor="#d11212"></asp:RegularExpressionValidator>
                             </div>
+                            <br />
                             <div class="row">
 
-                                <asp:Label ID="lblClave" runat="server" Text="Clave"></asp:Label>
-                                <asp:TextBox ID="txtClave" runat="server" CssClass="form_input"></asp:TextBox>
+                                <asp:Label ID="lblClave" runat="server" Text="Clave" CssClass="labelLog"></asp:Label>
+                                <asp:TextBox ID="txtClave" runat="server" CssClass="form_input" TextMode="Password"></asp:TextBox>
                                 <!--Validaciones-->
-                                <asp:RequiredFieldValidator ID="rfvClave" runat="server" ErrorMessage="Este campo es requerido" ControlToValidate="txtClave" ForeColor="Red"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="rfvClave" runat="server" ErrorMessage="Este campo es requerido" ControlToValidate="txtClave" ForeColor="#d11212"></asp:RequiredFieldValidator>
                             </div>
                             <!--Validaciones-->
                             <asp:Label ID="lblMensaje" runat="server" Text="" ForeColor="Red" Font-Bold="true" Visible="false"></asp:Label>

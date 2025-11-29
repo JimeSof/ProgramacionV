@@ -30,8 +30,8 @@ namespace ProyectoGrupo6
 
                     Usuario usuario = new Usuario();
 
-                    usuario.email = txtEmail.Text;
-                    usuario.clave = txtClave.Text;
+                    string email = txtEmail.Text;
+                    string clave = txtClave.Text;
 
 
                     // Variables OUTPUT, permiten validar contra los parametros del procedimiento
@@ -47,8 +47,8 @@ namespace ProyectoGrupo6
                         // Llamada directa del procedimiento almacenado 
                         // Se colocan las variables con los parametros del procedimiento
                         db.SpLOGIN(
-                            email: usuario.email,
-                            clave: usuario.clave,
+                            email: email,
+                            clave: clave,
                             idPersona: ref idPersona,
                             esEmpleado: ref esEmpleado,
                             acceso: ref acceso,
@@ -80,7 +80,7 @@ namespace ProyectoGrupo6
                         // Guardar datos en sesión 
                         Session.Add("Usuario", usuario);
 
-                        FormsAuthentication.SetAuthCookie(usuario.email, false);
+                        FormsAuthentication.SetAuthCookie(email, false);
 
                         //Despues valida si es un empleado o un cliente para redirigir al usuario
                         if (esEmpleado == true)
