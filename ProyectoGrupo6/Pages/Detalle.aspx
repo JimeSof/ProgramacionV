@@ -2,8 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <link rel="stylesheet" href="../Content/Estilos.css" />
-
     <h1>Detalle de la reservación</h1>
     <br />
 
@@ -18,7 +16,7 @@
             <asp:BoundField DataField="totalDiasReservacion" HeaderText="Días de la reserva" />
             <asp:BoundField DataField="numeroAdultos" HeaderText="Número de adultos" />
             <asp:BoundField DataField="numeroNinhos" HeaderText="Número de niños" />
-            <asp:BoundField DataField="costoTotal" HeaderText="Costo Total" />
+            <asp:BoundField DataField="costoTotal" HeaderText="Costo Total" DataFormatString="${0:N2}" />
 
         </Fields>
     </asp:DetailsView>
@@ -28,7 +26,7 @@
         <asp:Button ID="btnEditar" runat="server" Text="Editar reservación" CssClass="btn btn-outline-primary" Visible="false" OnClick="btnEditar_Click" />
         <asp:Button ID="btnCancelar" runat="server" Text="Cancelar reservación" CssClass="btn btn-outline-danger" Visible="false" OnClick="btnCancelar_Click" />
         <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-outline-secondary" OnClick="btnRegresar_Click"/>
-       
+        
     </div>
 
     <br />

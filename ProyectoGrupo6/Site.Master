@@ -14,6 +14,11 @@
     </asp:PlaceHolder>
 
     <webopt:BundleReference runat="server" Path="~/Content/css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&family=Varela+Round&display=swap" rel="stylesheet">
+
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -68,9 +73,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <asp:LinkButton ID="lbtnCerrar" runat="server" OnClick="lbtnCerrar_Click" CssClass="nav-link">Cerrar Sesión</asp:LinkButton></li>
-                        <!--editar este ultimo li-->
-
+                            <asp:LinkButton ID="lbtnCerrar" runat="server" OnClick="lbtnCerrar_Click" CssClass="nav-link" CausesValidation="false" OnClientClick="return confirm('¿Desea cerrar sesión?');">Cerrar Sesión</asp:LinkButton></li>
                     </ul>
 
                 </div>

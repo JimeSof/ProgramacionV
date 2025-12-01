@@ -73,7 +73,7 @@ namespace ProyectoGrupo6.Pages
                 catch { }
             }
         }
-      
+
         //Realiza el guardado de datos creados por medio del boton
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -122,9 +122,10 @@ namespace ProyectoGrupo6.Pages
 
                         //procedimiento es llamado para crear los datos despues de pasar por todas las validaciones 
                         db.SpCrearReservacion(idCliente, idHabitacion, fechaEntrada, fechaSalida,
-                                            numeroNinhos, numeroAdultos, precioAdul, precioNinh, idEmpleado);
+                                           numeroNinhos, numeroAdultos, precioAdul, precioNinh, idEmpleado);
 
                     }
+
 
                 }
                 catch { }

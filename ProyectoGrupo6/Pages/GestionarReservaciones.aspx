@@ -2,9 +2,14 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <link rel="stylesheet" href="../Content/Estilos.css" />
-
-    <h1 style="font-family: Arial, Helvetica, sans-serif">Gestionar Reservaciones</h1>
+    <div class="titulo">
+        <div class="izquierda">
+            <h1 class="">Gestionar Reservaciones</h1>
+        </div>
+        <div class="derecha">
+            <asp:Label ID="lblUsuario" runat="server" Text="Usuario" Font-Bold="True"></asp:Label>
+        </div>
+    </div>
 
     <!--El filtro de busqueda-->
     <div id="flitro" class="row">
@@ -17,7 +22,7 @@
             <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
             <!--Validaciones-->
             <asp:RequiredFieldValidator ID="rfvFechaEntrada" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtFechaEntrada"></asp:RequiredFieldValidator>
-           
+
         </div>
         <div class="col-3">
             <asp:Label ID="lbFechaSalida" runat="server" Text="Fecha Salida"></asp:Label>
@@ -28,16 +33,16 @@
         <div class="col-3">
             <br />
             <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" OnClick="btnFiltrar_Click" CssClass="btn btn-outline-dark" />
-        </div> 
+        </div>
 
         <!--Validacion de los campos de fecha-->
         <asp:CustomValidator ID="cuvFechas" runat="server" ErrorMessage="Fechas invalidas: Fecha de salida debe ser mayor a la fecha de entrada"
-                OnServerValidate="cuvFechas_ServerValidate" ForeColor="Red" Display="Dynamic"></asp:CustomValidator>
+            OnServerValidate="cuvFechas_ServerValidate" ForeColor="Red" Display="Dynamic"></asp:CustomValidator>
     </div>
+
     <div>
-        <a href="CrearReservacion.aspx" class="btn btn-primary" role="button">Nuevo reservación</a>
+        <a href="CrearReservacion.aspx" class="btn btn_cr" role="button">Nuevo reservación</a>
     </div>
-    <br />
 
     <!--GridView para visualizar los datos de la tabla para gestionar las reservaciones-->
     <asp:GridView ID="grdGestion" runat="server" AutoGenerateColumns="false" CssClass="rgrid table table-bordered table-hover"
@@ -58,7 +63,7 @@
             <asp:BoundField DataField="fechaSalida" HeaderText="Fecha salida" DataFormatString="{0:d}"
                 HeaderStyle-CssClass="text-center" ItemStyle-HorizontalAlign="Center" />
 
-            <asp:BoundField DataField="costoTotal" HeaderText="Costo" DataFormatString="{0:C2}"
+            <asp:BoundField DataField="costoTotal" HeaderText="Costo" DataFormatString="${0:N2}"
                 HeaderStyle-CssClass="text-end" ItemStyle-HorizontalAlign="Right" />
 
             <asp:TemplateField HeaderText="Estado" HeaderStyle-CssClass="text-center" ItemStyle-HorizontalAlign="Center">
