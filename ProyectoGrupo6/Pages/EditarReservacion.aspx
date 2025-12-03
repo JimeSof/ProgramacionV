@@ -34,7 +34,8 @@
             <asp:Label ID="lblFechaEntrada" runat="server" Text="Fecha de entrada"></asp:Label>
             <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
             <!--Validaciones-->
-      ESTE ES EL VALIDATOR      <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtFechaEntrada"></asp:RequiredFieldValidator>
+            ESTE ES EL VALIDATOR     
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtFechaEntrada"></asp:RequiredFieldValidator>
 
         </div>
         <div class="col-3">
@@ -55,13 +56,13 @@
             <asp:TextBox ID="txtNumeroNinhos" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
             <!--Validaciones-->
         </div>
-
-        <br />
-        <div>
-            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="btnGuardar_Click" />
-            <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-outline-dark" OnClick="btnRegresar_Click" />
-        </div>
-
     </div>
+    <br />
+    <div>
+        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="btnGuardar_Click" />
+        <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-outline-secondary" OnClick="btnRegresar_Click" />
+    </div>
+
+
 
 </asp:Content>

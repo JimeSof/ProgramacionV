@@ -30,6 +30,11 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
+    SET @idPersona = NULL;
+    SET @esEmpleado = NULL;
+    SET @acceso = 0;
+    SET @nombreCompleto = NULL;
+
     DECLARE @estado VARCHAR(1);
 
  SELECT top 1
@@ -43,8 +48,6 @@ BEGIN
          
          IF @idPersona is not null and @estado = 'A'
             SET @acceso = 1;
-         ELSE  
-            SET @acceso = 0;
 END
 GO
 
@@ -430,3 +433,60 @@ END
 GO
 
 /**/
+
+USE [PV_ProyectoFinal]
+GO
+/****** Object:  StoredProcedure [dbo].[spEditarReservacion] ******/
+
+CREATE PROCEDURE [dbo].[spEditarReservacion]
+ @idReservacion INT,
+ @fechaEntrada DATETIME,
+ @fechaSalida DATETIME,
+ @numeroAdultos INT,
+ @numeroNinhos INT,
+ @idPersonaAccion INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @costoAdulto NUMERIC(10,2),
+            @costoNinho NUMERIC(10,2),
+            @idHabitacion INT,
+            @totalDias INT,
+            @costoTotal NUMERIC(14,2);
+
+    -- Obtener costo y habitación actual de la reservación
+    SELECT 
+        @costoAdulto = costoPorCadaAdulto,
+        @costoNinho  = costoPorCadaNinho,
+        @idHabitacion = idHabitacion
+    FROM Reservacion
+    WHERE idReservacion = @idReservacion;
+
+    -- Calcular total de días
+    SET @totalDias = DATEDIFF(DAY, @fechaEntrada, @fechaSalida);
+    IF @totalDias <= 0 SET @totalDias = 1;
+
+    -- Calcular costo total
+    SET @costoTotal =
+        (@numeroAdultos * @costoAdulto * @totalDias)
+        + (@numeroNinhos * @costoNinho * @totalDias);
+
+    -- Actualizar la reservación
+    UPDATE Reservacion
+    SET fechaEntrada = @fechaEntrada,
+        fechaSalida  = @fechaSalida,
+        numeroAdultos = @numeroAdultos,
+        numeroNinhos = @numeroNinhos,
+        totalDiasReservacion = @totalDias,
+        costoTotal = @costoTotal,
+        fechaModificacion = GETDATE()
+    WHERE idReservacion = @idReservacion;
+
+    -- Guardar el cambio en la bitácora
+    INSERT INTO Bitacora
+    (idReservacion, idPersona, accionRealizada, fechaDeLaAccion)
+    VALUES
+    (@idReservacion, @idPersonaAccion, 'CORREGIDA', GETDATE());
+END
+
