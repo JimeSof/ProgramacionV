@@ -54,17 +54,16 @@ namespace ProyectoGrupo6
                             acceso: ref acceso,
                             nombreCompleto: ref nombreCompleto
                         );
+
+                        if (idPersona == null)
+                        {
+
+                            lblMensaje.Text = "Usuario o contraseña incorrectos";
+                            lblMensaje.Visible = true;
+                            return;
+                        }
                     }
-
-                    if (idPersona == null || acceso == null)
-                    {
-
-                        lblMensaje.Text="Usuario o contraseña incorrectos";
-                        lblMensaje.Visible = true;  
-                    }
-
                     
-
                     //Asignar las variables al objeto Usuario
                     usuario.idPersona = idPersona;
                     usuario.esEmpleado = esEmpleado;
@@ -99,8 +98,6 @@ namespace ProyectoGrupo6
                         lblMensaje.Visible = true;
                         return;
                     }
-
-
                 }
                 catch
                 {
