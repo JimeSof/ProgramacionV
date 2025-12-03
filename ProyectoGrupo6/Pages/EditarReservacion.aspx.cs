@@ -61,13 +61,17 @@ namespace ProyectoGrupo6.Pages
                     return;
                 }
 
-                if (data.Estado == 'I' || data.FechaSalida <= hoy || (data.FechaEntrada <= hoy && data.FechaSalida > hoy))
+                if (data.Estado == 'I' || data.FechaSalida <= hoy)
                 {
                     RedirigirSegunUsuario(esEmpleado);
                     return;
+                }else if (data.FechaEntrada <= hoy && data.FechaSalida > hoy && esEmpleado == false)
+                {
+                    Response.Redirect("MisReservaciones.aspx");
+                    return;
                 }
 
-                //llena los campos con los datos obtenidos
+                //llena los campos con los datos obtenidos 
                 hfnIdReservacion.Value = data.IdReservacion.ToString();
                 txtHotel.Text = data.Hotel;
                 txtNumeroHabitacion.Text = data.NumeroHabitacion;
@@ -133,12 +137,13 @@ namespace ProyectoGrupo6.Pages
 
                 //PON LAS VARIABLES AQUI PARA QUE NO HAYA PROBLEMAS AL MOMENTO DE GUARDAR
 
+                int idReserva = int.Parse(hfnIdReservacion.Value);
 
                 Usuario usuario = (Usuario)Session["Usuario"];
 
                 using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                 {
-                  //  db.SpEditarReservacion(idReserva, entrada, salida, adultos, ninhos, usuario.idPersona.Value);
+                   db.SpEditarReservacion(idReserva, entrada, salida, adultos, ninhos, usuario.idPersona.Value);
                 }
 
                 bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
