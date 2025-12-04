@@ -3,7 +3,13 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title">
         <h2 id="title"><%: Title %>.</h2>
-        <h3>Your application description page.</h3>
-        <p>Use this area to provide additional information.</p>
+        <h3>Hotel Solar busca ofrecer una maravillosa experiencia, que deje tu vida dorada.</h3>
+
+        <p>
+            En el corazón de la ciudad, el <strong>Hotel Solar Dorado</strong> se distingue por su hospitalidad,
+            elegancia y confort. Nuestro compromiso es brindarte momentos únicos, donde cada detalle está
+            pensado para tu bienestar. 
+        </p>
+
     </main>
 </asp:Content>
