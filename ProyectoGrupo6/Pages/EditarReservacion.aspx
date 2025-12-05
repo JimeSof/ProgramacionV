@@ -5,7 +5,7 @@
 
     <h1>Modificar Reservaciones</h1>
 
-    <div class="container">
+  
         <div>
             <asp:HiddenField ID="hfnIdReservacion" runat="server" />
         </div>
@@ -25,7 +25,6 @@
             <asp:TextBox ID="txtCliente" runat="server" CssClass="form-control" Enabled="false" TextMode="SingleLine"></asp:TextBox>
 
         </div>
-    </div>
     <br />
 
     <!--Datos a rellenar-->
