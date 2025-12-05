@@ -65,7 +65,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a id="liGestionHabitacion" runat="server" class="nav-link" href="~/Pages/GestionarHabitaciones">Gestionar Habitaciones
+                            <a id="liGestionHabitacion" runat="server" class="nav-link" href="~/Pages/ListarHabitaciones">Gestionar Habitaciones
                             </a>
 
                         </li>
@@ -83,6 +83,7 @@
             </div>
         </nav>
         <div class="container body-content">
+        <br />
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />

@@ -80,9 +80,7 @@ namespace ProyectoGrupo6.Pages
             if (Page.IsValid)
             {
                 try
-                {  // Hotel hotel = new Hotel();
-                   // Reservacion reservacion = new Reservacion();    
-
+                {  
                     Usuario usuario = (Usuario)Session["Usuario"];
                     int idEmpleado = Convert.ToInt32(usuario.idPersona);
 

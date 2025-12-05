@@ -21,14 +21,14 @@
             <asp:Label ID="lbFechaEntrada" runat="server" Text="Fecha Entrada"></asp:Label>
             <asp:TextBox ID="txtFechaEntrada" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
             <!--Validaciones-->
-            <asp:RequiredFieldValidator ID="rfvFechaEntrada" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtFechaEntrada"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="rfvFechaEntrada" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtFechaEntrada" Display="Dynamic"></asp:RequiredFieldValidator>
 
         </div>
         <div class="col-3">
             <asp:Label ID="lbFechaSalida" runat="server" Text="Fecha Salida"></asp:Label>
             <asp:TextBox ID="txtFechaSalida" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
             <!--Validaciones-->
-            <asp:RequiredFieldValidator ID="rfvFechaSalida" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtFechaSalida"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="rfvFechaSalida" runat="server" ErrorMessage="Este campo es requerido" ForeColor="Red" ControlToValidate="txtFechaSalida" Display="Dynamic"></asp:RequiredFieldValidator>
         </div>
         <div class="col-3">
             <br />

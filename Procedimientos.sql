@@ -251,12 +251,13 @@ GO
 
 Parametros:
 
+-> idPersona: capyura el id de la persona que realiza sesion en caso de ser cliente
 -> nombreHotel: este datos captura el nombre del hotel elegido por el usuario
 -> nombrePersona: este dato es para capturar el nombre de a quien se le asignaria la reservación
 -> fechaEntrada: este dato captura la fecha seleccionada para la entrada al hotel
 -> fechaSalida: este dato captura la fecha seleccionada para la salida al hotel
--> numeroNinhos: captura el numero de niños seleccionadas por el usuario
--> numeroAdultos: captura el numero de adultos seleccionadas por el usuario (no menos de 1)
+-> numeroNinhos: captura el numero de niños seleccionados por el usuario
+-> numeroAdultos: captura el numero de adultos seleccionados por el usuario (no menos de 1)
 -> costoPorAdulto: este dato se captura del sistema ya que pueden haber cambios a futuro con los precios
 -> costoPorNinho: este dato se captura del sistema ya que pueden haber cambios a futuro con los precios.
 -> costoTotal: el calculo de este dato se realiza en el sistema en caso de haber un futuro cambio y no corregir la BD
@@ -399,7 +400,11 @@ BEGIN
 END
 GO
 
-/*PROCEDIMIENTO PARA CANCELAR LAS RESERVACIONES*/
+/*PROCEDIMIENTO PARA CANCELAR LAS RESERVACIONES
+
+->idReservacion: Parametro de entrada para capturar la reservacion  a cancelar
+->idEmpleado: Parametro de entrada para capturar el id del empleado y colocarlo en la bitacora
+*/
 
 CREATE PROCEDURE [dbo].[spCancelarReservacion]
     @idReservacion INT,
@@ -434,9 +439,15 @@ GO
 
 /**/
 
-USE [PV_ProyectoFinal]
-GO
-/****** Object:  StoredProcedure [dbo].[spEditarReservacion] ******/
+/*PROCEDIMIENTO PARA EDITAR UNA RESERVACION
+
+->idReservacion: Parametro de entrada para capturar la reservacion a editar
+-> fechaEntrada: este dato captura la fecha seleccionada para la entrada al hotel
+-> fechaSalida: este dato captura la fecha seleccionada para la salida al hotel
+-> numeroNinhos: captura el numero de niños seleccionados por el usuario
+-> numeroAdultos: captura el numero de adultos seleccionados por el usuario (no menos de 1)
+-> idPersonaAccion: es el id de la persona que realiza la accion sobre la reservacion
+*/
 
 CREATE PROCEDURE [dbo].[spEditarReservacion]
  @idReservacion INT,
@@ -489,4 +500,118 @@ BEGIN
     VALUES
     (@idReservacion, @idPersonaAccion, 'CORREGIDA', GETDATE());
 END
+GO
+
+/*PROCEDIMIENTO PARA LISTAR HABITACIONES
+*/
+
+CREATE PROCEDURE [dbo].[spListarHabitaciones]
+ AS
+ BEGIN
+	Select Ha.idHabitacion, Ho.Nombre, Ha.numeroHabitacion,Ha.capacidadMaxima,Ha.estado
+	from Habitacion Ha
+		inner join Hotel Ho on Ha.idHotel=Ho.idHotel
+	order by Ho.nombre,Ha.estado,Ha.numeroHabitacion
+ END
+ GO
+ 
+/*PROCEDIMIENTO PARA CREAR HABITACION
+
+*/ 
+
+CREATE PROCEDURE [dbo].[spCrearHabitacion]
+	@idHotel INT,
+    @numeroHabitacion VARCHAR(10),
+    @capacidadMaxima INT,
+    @descripcion VARCHAR(500),
+    @estado VARCHAR(1)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Si no existe, insertar la nueva habitación
+    INSERT INTO [dbo].[Habitacion] 
+        ([idHotel], [numeroHabitacion], [capacidadMaxima], [descripcion], [estado]) 
+    VALUES 
+        (@idHotel, @numeroHabitacion, @capacidadMaxima, @descripcion, @estado);
+END
+GO
+
+
+/*PROCEDIMIENTO QUE VALIDA LA EXISTENCIA DE UNA HABITACION*/
+CREATE PROCEDURE [dbo].[spValidarHabitacion] 
+    @idHotel INT,
+    @numeroHabitacion VARCHAR(10)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT COUNT(1) AS Existe
+    FROM [dbo].[Habitacion]
+    WHERE idHotel = @idHotel
+      AND numeroHabitacion = @numeroHabitacion;
+END
+GO
+
+
+/*PROCEDIMIENTO BUSCAR HABITACION*/
+
+CREATE PROCEDURE [dbo].[spBuscarHabitacionById]
+    @idHabitacion INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        Ha.idHabitacion     AS IdHabitacion,
+        Ha.idHotel          AS IdHotel,
+        Ho.nombre           AS Hotel,
+        Ha.numeroHabitacion AS NumeroHabitacion,
+        Ha.capacidadMaxima  AS CapacidadMaxima,
+        Ha.descripcion      AS Descripcion
+    FROM dbo.Habitacion Ha
+    INNER JOIN dbo.Hotel Ho 
+        ON Ha.idHotel = Ho.idHotel
+    WHERE Ha.idHabitacion = @idHabitacion;
+END
+GO
+
+
+
+/*PROCEDIMIENTO PARA EDITAR HABITACION
+
+*/
+
+CREATE PROCEDURE [dbo].[spEditarHabitacion]
+    @idHabitacion INT,
+    @idHotel INT,
+    @numeroHabitacion VARCHAR(50),
+    @capacidadMaxima INT,
+    @descripcion VARCHAR(500)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE dbo.Habitacion
+    SET 
+        idHotel = @idHotel,
+        numeroHabitacion = @numeroHabitacion,
+        capacidadMaxima = @capacidadMaxima,
+        descripcion = @descripcion
+    WHERE idHabitacion = @idHabitacion;
+END
+GO
+
+/*Inactivar una habitacion*/
+CREATE PROCEDURE [dbo].[spInactivarHabitacion]
+    @idHabitacion INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE dbo.Habitacion
+    SET estado = 'I'
+    WHERE idHabitacion = @idHabitacion;
+END;
+GO
 
