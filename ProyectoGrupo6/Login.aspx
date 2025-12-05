@@ -37,9 +37,9 @@
                                 <asp:Label ID="lblEmail" runat="server" Text="Email" CssClass="labelLog"></asp:Label>
                                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form_input" placeholder="xxxx@sitio.com"></asp:TextBox>
                                 <!--Validaciones-->
-                                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Este campo es requerido" ForeColor="#d11212" ControlToValidate="txtEmail"></asp:RequiredFieldValidator><br />
+                                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Este campo es requerido" ForeColor="#d11212" ControlToValidate="txtEmail" Display="Dynamic"></asp:RequiredFieldValidator><br />
                                 <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="El formato del email no es valido"
-                                    ValidationExpression="[^@\s]+@[^@\s]+\.[^@\s]+$" ControlToValidate="txtEmail" ForeColor="#d11212"></asp:RegularExpressionValidator>
+                                    ValidationExpression="[^@\s]+@[^@\s]+\.[^@\s]+$" ControlToValidate="txtEmail" ForeColor="#d11212" Display="Dynamic"></asp:RegularExpressionValidator>
                             </div>
                             <br />
                             <div class="row">
@@ -47,7 +47,7 @@
                                 <asp:Label ID="lblClave" runat="server" Text="Clave" CssClass="labelLog"></asp:Label>
                                 <asp:TextBox ID="txtClave" runat="server" CssClass="form_input" TextMode="Password"></asp:TextBox>
                                 <!--Validaciones-->
-                                <asp:RequiredFieldValidator ID="rfvClave" runat="server" ErrorMessage="Este campo es requerido" ControlToValidate="txtClave" ForeColor="#d11212"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="rfvClave" runat="server" ErrorMessage="Este campo es requerido" ControlToValidate="txtClave" ForeColor="#d11212" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                             <!--Validaciones-->
                             <asp:Label ID="lblMensaje" runat="server" Text="" ForeColor="Red" Font-Bold="true" Visible="false"></asp:Label>

@@ -26,12 +26,8 @@ namespace ProyectoGrupo6.Pages
                     lblUsuario.Text = usuario.nombreCompleto;
 
                     bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
-                    if (esEmpleado == false)
-                    {
-                        // Si no es empleado, vuelve a mis reservaciones página
-                        Response.Redirect("~/Pages/MisReservaciones.aspx");
-                        return;
-                    }
+                    RedirigirSegunUsuario(esEmpleado);
+
                     if (!IsPostBack)
                     {
 
@@ -63,6 +59,13 @@ namespace ProyectoGrupo6.Pages
                 }
 
             }
+        }
+
+        private void RedirigirSegunUsuario(bool esEmpleado)
+        {
+            //redirecciona segun el tipo de usuario
+            if (!esEmpleado)
+                Response.Redirect("MisReservaciones.aspx");
         }
 
         public String EvaluarEstado(string estado, DateTime fechaEntrada, DateTime fechaSalida)

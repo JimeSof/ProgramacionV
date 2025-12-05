@@ -292,21 +292,26 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Estilos.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="CrearHabitacion.aspx" />
     <Content Include="DATA\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database1.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Default.aspx" />
+    <Content Include="Imagen\LogoH.png" />
     <Content Include="Imagen\LogoHotel.png" />
     <Content Include="LinqToDB.Templates\CopyMe.SqlServer.tt.txt" />
     <Content Include="Login.aspx" />
+    <Content Include="Pages\CrearHabitacion.aspx" />
     <Content Include="Pages\Detalle.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Pages\CrearReservacion.aspx" />
+    <Content Include="Pages\EditarHabitacion.aspx" />
     <Content Include="Pages\EditarReservacion.aspx" />
-    <Content Include="Pages\GestionarHabitaciones.aspx" />
     <Content Include="Pages\GestionarReservaciones.aspx" />
+    <Content Include="Pages\HabitacionInactiva.aspx" />
+    <Content Include="Pages\ListarHabitaciones.aspx" />
     <Content Include="Pages\MisReservaciones.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -405,6 +410,13 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CrearHabitacion.aspx.cs">
+      <DependentUpon>CrearHabitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CrearHabitacion.aspx.designer.cs">
+      <DependentUpon>CrearHabitacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DATA\Database1.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -424,6 +436,13 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CrearHabitacion.aspx.cs">
+      <DependentUpon>CrearHabitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\CrearHabitacion.aspx.designer.cs">
+      <DependentUpon>CrearHabitacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Detalle.aspx.cs">
       <DependentUpon>Detalle.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -441,6 +460,13 @@
     <Compile Include="Pages\CrearReservacion.aspx.designer.cs">
       <DependentUpon>CrearReservacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EditarHabitacion.aspx.cs">
+      <DependentUpon>EditarHabitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\EditarHabitacion.aspx.designer.cs">
+      <DependentUpon>EditarHabitacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EditarReservacion.aspx.cs">
       <DependentUpon>EditarReservacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -448,19 +474,26 @@
     <Compile Include="Pages\EditarReservacion.aspx.designer.cs">
       <DependentUpon>EditarReservacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\GestionarHabitaciones.aspx.cs">
-      <DependentUpon>GestionarHabitaciones.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\GestionarHabitaciones.aspx.designer.cs">
-      <DependentUpon>GestionarHabitaciones.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Pages\GestionarReservaciones.aspx.cs">
       <DependentUpon>GestionarReservaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\GestionarReservaciones.aspx.designer.cs">
       <DependentUpon>GestionarReservaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HabitacionInactiva.aspx.cs">
+      <DependentUpon>HabitacionInactiva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\HabitacionInactiva.aspx.designer.cs">
+      <DependentUpon>HabitacionInactiva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ListarHabitaciones.aspx.cs">
+      <DependentUpon>ListarHabitaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ListarHabitaciones.aspx.designer.cs">
+      <DependentUpon>ListarHabitaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\MisReservaciones.aspx.cs">
       <DependentUpon>MisReservaciones.aspx</DependentUpon>
