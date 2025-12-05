@@ -4,7 +4,7 @@
 
     <h1>Crear reservación</h1>
 
-    <div class="container">
+    <div class="col-md-6">
 
         <div>
             <span>Hotel:</span>
@@ -23,7 +23,8 @@
                 ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
         </div>
         <br />
-
+    </div>
+    <div>
         <div class="row">
             <div class="col-3">
                 <label>Fecha Entrada:</label>
@@ -56,7 +57,7 @@
                 <asp:RequiredFieldValidator ID="rfvNumeroAdultos" runat="server" ControlToValidate="txtNumAdultos"
                     ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
                 <asp:CustomValidator ID="cuvNumeroAdultos" runat="server" ErrorMessage="Cantidad no valida para la habitacion"
-                    ForeColor="Red" OnServerValidate="cuvNumeroAdultos_ServerValidate"></asp:CustomValidator>
+                    ForeColor="Red" OnServerValidate="cuvNumeroAdultos_ServerValidate" Display="Dynamic"></asp:CustomValidator>
             </div>
             <div class="col-3">
                 <label>Número de niños:</label>
@@ -66,15 +67,13 @@
                     ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
 
             </div>
-
-
         </div>
-        <br />
-
-        <div>
-            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="btnGuardar_Click" />
-            <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-danger" OnClick="btnRegresar_Click" CausesValidation="False" />
-        </div>
-
     </div>
+    <br />
+    <div>
+        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="btnGuardar_Click" />
+        <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-danger" OnClick="btnRegresar_Click" CausesValidation="False" />
+    </div>
+
+
 </asp:Content>
