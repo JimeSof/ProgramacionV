@@ -114,15 +114,6 @@ namespace ProyectoGrupo6.Pages
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumeroAdultos;
 
         /// <summary>
-        /// Control cuvNumeroAdultos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cuvNumeroAdultos;
-
-        /// <summary>
         /// Control txtNumNinos.
         /// </summary>
         /// <remarks>
@@ -139,6 +130,15 @@ namespace ProyectoGrupo6.Pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumNinhos;
+
+        /// <summary>
+        /// Control cuvNumeroAdultos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cuvNumeroAdultos;
 
         /// <summary>
         /// Control btnGuardar.

@@ -13,7 +13,7 @@ namespace ProyectoGrupo6.Pages
             try
             {
                 Usuario usuario = (Usuario)Session["Usuario"];
-                lblUsuario.Text = usuario.nombreCompleto;
+                lblUsuario.Text = "Usuario: " + usuario.nombreCompleto;
 
                 if (!IsPostBack)
                 {

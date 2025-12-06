@@ -40,7 +40,7 @@
             <asp:RequiredFieldValidator ID="rfvCantidad" runat="server" ControlToValidate="txtCantidad"
                 ForeColor="Red" Display="Dynamic" ErrorMessage="Falta ingresar capacidad de habitación"></asp:RequiredFieldValidator>
             <asp:RangeValidator ID="rvCantidad" runat="server" ErrorMessage="El numero debe ser entero entre 1-8"
-                ControlToValidate="txtCantidad" MinimumValue="1" MaximumValue="8" Type="Integer"></asp:RangeValidator>
+                ControlToValidate="txtCantidad" MinimumValue="1" MaximumValue="8" Type="Integer" ForeColor="Red"></asp:RangeValidator>
         </div>
         <!--------------------------------------------------------------------------------------->
         <div>

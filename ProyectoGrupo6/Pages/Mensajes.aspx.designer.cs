@@ -15,6 +15,15 @@ namespace ProyectoGrupo6.Pages
     {
 
         /// <summary>
+        /// Control pnlResultado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlResultado;
+
+        /// <summary>
         /// Control lblResultado.
         /// </summary>
         /// <remarks>

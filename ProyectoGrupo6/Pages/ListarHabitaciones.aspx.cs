@@ -21,7 +21,7 @@ namespace ProyectoGrupo6.Pages
 
                 Usuario usuario = (Usuario)Session["Usuario"];
 
-                lblUsuario.Text = usuario.nombreCompleto;
+                lblUsuario.Text = "Usuario: " + usuario.nombreCompleto;
 
                 using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                 { 

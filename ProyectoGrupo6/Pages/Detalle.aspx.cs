@@ -105,6 +105,7 @@ namespace ProyectoGrupo6
         { //llama al procedimiento almacenado para cancelar la reservacion
             try
             {
+
                 int idReservacion = int.Parse(Request.QueryString["idReservacion"]);
                 Usuario usuario = (Usuario)Session["Usuario"];
 
@@ -114,21 +115,10 @@ namespace ProyectoGrupo6
                     db.SpCancelarReservacion(idReservacion, usuario.idPersona.Value);
                 }
 
-                // mensaje al usuario
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert",
-                    "alert('¡Reservación cancelada correctamente!');", true);
+                //redirecciona a la pagina correspondiente al mensaje
+                Session["Mensaje"] = "CancelarReservacion";
+                Response.Redirect("~/Pages/Mensajes.aspx");
 
-                //redirecciona a la pagina correspondiente segun el tipo de usuario
-                bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
-
-                if (esEmpleado == true)
-                {
-                    Response.Redirect("GestionarReservaciones.aspx");
-                }
-                else
-                {
-                    Response.Redirect("MisReservaciones.aspx");
-                }
             }
             catch
             {
