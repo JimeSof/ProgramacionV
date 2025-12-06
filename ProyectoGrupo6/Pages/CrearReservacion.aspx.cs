@@ -31,12 +31,17 @@ namespace ProyectoGrupo6.Pages
                         //obtener hoteles
                         var hotel = db.SpObtenerHoteles().ToList();
 
-                        ddlHotel.DataValueField = "IdHotel";
-                        ddlHotel.DataTextField = "Nombre";
-                        ddlHotel.DataSource = hotel;
-                        ddlHotel.DataBind();
+                        if (hotel != null)
+                        {
+                            ddlHotel.DataValueField = "IdHotel";
+                            ddlHotel.DataTextField = "Nombre";
+                            ddlHotel.DataSource = hotel;
+                            ddlHotel.DataBind();
 
-                        ddlHotel.Items.Insert(0, new ListItem("Seleccione un hotel", ""));
+                            ddlHotel.Items.Insert(0, new ListItem("Seleccione un hotel", ""));
+                        }
+
+
 
                         //obtener clientes
                         var clientes = db.SpObtenerCientes().ToList();
@@ -45,10 +50,13 @@ namespace ProyectoGrupo6.Pages
                         if (esEmpleado == true)
                         {
                             //si es empleado, campo desbloqueado
-                            ddlCliente.DataValueField = "IdPersona";
-                            ddlCliente.DataTextField = "NombreCompleto";
-                            ddlCliente.DataSource = clientes;
-                            ddlCliente.DataBind();
+                            if (clientes != null)
+                            {
+                                ddlCliente.DataValueField = "IdPersona";
+                                ddlCliente.DataTextField = "NombreCompleto";
+                                ddlCliente.DataSource = clientes;
+                                ddlCliente.DataBind();
+                            }
 
                             ddlCliente.Items.Insert(0, new ListItem("Selecciones un  cliente", ""));
                             ddlCliente.Enabled = true;
@@ -80,7 +88,7 @@ namespace ProyectoGrupo6.Pages
             if (Page.IsValid)
             {
                 try
-                {  
+                {
                     Usuario usuario = (Usuario)Session["Usuario"];
                     int idEmpleado = Convert.ToInt32(usuario.idPersona);
 
@@ -108,7 +116,7 @@ namespace ProyectoGrupo6.Pages
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                     {
                         //este procedimiento se llama para capturar los costos de adultos y niños y el id de la habitacion
-                        var costosHabit = db.SpObtenerCostosyHabitacion(idHotel, cantidadPer).FirstOrDefault();
+                        var costosHabit = db.SpObtenerCostosyHabitacion(idHotel, cantidadPer, fechaEntrada, fechaSalida).FirstOrDefault();
 
                         if (costosHabit != null)
                         {
@@ -128,7 +136,8 @@ namespace ProyectoGrupo6.Pages
                 }
                 catch { }
 
-                Response.Redirect("~/Pages/GestionarReservaciones.aspx");
+                Session["Mensaje"] = "CreadaReservacion";
+                Response.Redirect("~/Pages/Mensajes.aspx");
 
             }
         }
@@ -207,59 +216,56 @@ namespace ProyectoGrupo6.Pages
         {
             try
             {
-                int numAdultos = 0;
-                int numNinhos = 0;
+                args.IsValid = false;
 
-                //capturar el id del hotel seleccionado por el usuario
-                int idHotel = int.Parse(ddlHotel.SelectedValue);
-
-                //comprobar los datos de los campos txt para evitar errores en crear
-                bool adultoValido = int.TryParse(txtNumAdultos.Text, out numAdultos);
-                bool ninhosValido = int.TryParse(txtNumNinos.Text, out numNinhos);
-
+                //validar la cantidad de niños y adultos
+                bool adultoValido = int.TryParse(txtNumAdultos.Text, out int numAdultos);
+                bool ninhosValido = int.TryParse(txtNumNinos.Text, out int numNinhos);
 
                 int cantidadActual = numAdultos + numNinhos;
 
-                args.IsValid = false;
+                //validaciones los campos de adultos y niños
+                if (!adultoValido || numAdultos <= 0)
+                {
+                    cuvNumeroAdultos.ErrorMessage = "Cantidad de adultos no es válida.";
+                    return;
+                }
 
-                //llamado de la base para traer los datos de cantidad maxima y la habitacion seleccionada
+                if (!ninhosValido || numNinhos < 0)
+                {
+                    cuvNumeroAdultos.ErrorMessage = "Cantidad de niños inválida.";
+                    return;
+                }
+
+                // Validación con base de datos
+                int idHotel = int.Parse(ddlHotel.SelectedValue);
+
+                DateTime fechaEntrada = DateTime.Parse(txtFechaEntrada.Text);
+                DateTime fechaSalida = DateTime.Parse(txtFechaSalida.Text);
+
                 using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                 {
+                    var cantidades = db.SpObtenerCostosyHabitacion(idHotel, cantidadActual,fechaEntrada,fechaSalida).FirstOrDefault();
 
-                    var cantidades = db.SpObtenerCostosyHabitacion(idHotel, cantidadActual).FirstOrDefault();
-
-                    if (cantidades == null) //si no hay una habitaciones lanza el mensaje
+                    //si no hay habitaciones disponibles
+                    if (cantidades == null)
                     {
-                        cuvNumeroAdultos.ErrorMessage = "No hay habitaciones disponibles para la cantidad de huespedes";
-                        args.IsValid = false;
+                        cuvNumeroAdultos.ErrorMessage = "No hay habitaciones disponibles para la cantidad de huéspedes.";
                         return;
                     }
 
-                    //si hay habitaciones disponibles, pasa la cantidad maxima de la habitaciones a la variable
-                    int cantidadMaxima = Convert.ToInt32(cantidades.CapacidadMaxima);
+                    int capacidadMaxima = Convert.ToInt32(cantidades.CapacidadMaxima);
 
-                    if (adultoValido == false || numAdultos <= 0)
+                    //revisa cantidades del usuario con la cantidad maxima de la habitacion
+                    if (cantidadActual > capacidadMaxima)
                     {
-                        cuvNumeroAdultos.ErrorMessage = "Cantidad de adultos no es valida.";
-                    }
-                    else if (numAdultos > cantidadMaxima)
-                    {
-                        cuvNumeroAdultos.ErrorMessage = "Cantidad no permitida, excede la capacidad permitida";
-                    }
-                    else if (ninhosValido == false || numNinhos < 0)
-                    {
-                        cuvNumeroAdultos.ErrorMessage = "Cantidad de Niños invalida";
-                    }
-                    else if ((numAdultos + numNinhos) > cantidadMaxima)
-                    {
-                        cuvNumeroAdultos.ErrorMessage = "Cantidad excede la capacidad maxima de la habitacion";
-                    }
-                    else
-                    {
-                        args.IsValid = true;
+                        cuvNumeroAdultos.ErrorMessage = "Cantidad excede la capacidad máxima de la habitación.";
+                        return;
                     }
                 }
 
+                //si todo pasó
+                args.IsValid = true;
 
             }
             catch { }

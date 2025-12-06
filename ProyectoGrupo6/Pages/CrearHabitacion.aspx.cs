@@ -61,7 +61,7 @@ namespace ProyectoGrupo6.Pages
 
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                     {
-                        db.SpCrearHabitacion(idHotel, numeroHabitacion, capacidadMaxima, descripcion, 'A');
+                        db.SpCrearHabitacion(idHotel, numeroHabitacion, capacidadMaxima, descripcion);
 
                     }
 
@@ -69,7 +69,9 @@ namespace ProyectoGrupo6.Pages
                 catch
                 {
                 }
-                Response.Redirect("~/Pages/ListarHabitaciones.aspx");
+
+                Session["Mensaje"] = "CreadaHabitacion";
+                Response.Redirect("~/Pages/Mensajes.aspx");
             }
         }
         

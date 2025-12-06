@@ -56,8 +56,6 @@
                 <!--Validaciones-->
                 <asp:RequiredFieldValidator ID="rfvNumeroAdultos" runat="server" ControlToValidate="txtNumAdultos"
                     ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                <asp:CustomValidator ID="cuvNumeroAdultos" runat="server" ErrorMessage="Cantidad no valida para la habitacion"
-                    ForeColor="Red" OnServerValidate="cuvNumeroAdultos_ServerValidate" Display="Dynamic"></asp:CustomValidator>
             </div>
             <div class="col-3">
                 <label>Número de niños:</label>
@@ -65,8 +63,10 @@
                 <!--Validaciones-->
                 <asp:RequiredFieldValidator ID="rfvNumNinhos" runat="server" InitialValue="" ControlToValidate="txtNumNinos"
                     ErrorMessage="Este valor es requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-
             </div>
+
+            <asp:CustomValidator ID="cuvNumeroAdultos" runat="server" ErrorMessage="Cantidad no valida para la habitacion"
+                    ForeColor="Red" OnServerValidate="cuvNumeroAdultos_ServerValidate" Display="Dynamic"></asp:CustomValidator>
         </div>
     </div>
     <br />

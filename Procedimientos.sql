@@ -140,6 +140,7 @@ SELECT TOP 1
               r.idReservacion,
                r.idPersona,
                h.nombre as hotel, 
+               hb.capacidadMaxima,
                hb.numeroHabitacion,
                p.nombreCompleto as cliente,
                r.fechaEntrada,
@@ -186,7 +187,10 @@ BEGIN
 END
 GO
 
-/*PROCEDIMIENTO DE CAPTURAR VALORES DE HOTEL*/
+/*PROCEDIMIENTO DE CAPTURAR VALORES DE HOTEL
+
+Este procedimiento obtiene los hoteles y los muestra en los dropdown del proyecto
+*/
 CREATE PROCEDURE [dbo].[spObtenerHoteles]
 AS
 BEGIN
@@ -196,9 +200,10 @@ BEGIN
 END;
 GO
 
-/*PROCEDIMIENTO DE CAPTURAR A LOS CLIENTES*/
+/*PROCEDIMIENTO DE CAPTURAR A LOS CLIENTES
 
-
+Este procedimiento obtiene los clientes y en caso de ser un empleado, visualiza todos los clientes activos en el dropdown
+*/
 CREATE PROCEDURE [dbo].[spObtenerCientes]
 AS
 BEGIN
@@ -209,11 +214,27 @@ BEGIN
 END;
 GO
 
-/*PROCEDIMIENTO OBTENER CANTIDADES Y HABITACION*/
+/*PROCEDIMIENTO OBTENER CANTIDADES Y HABITACION
+
+-> idHotel: este dato es el hotel seleccionado por el usuario
+-> personaTotal: este dato es la suma de las personas que reservan la habitacion
+
+Este procedimiento obtiene los costos y las habitaciones, es decir, captura el id del hotel y el total de las personas
+que reservan para realizar la busqueda con la subconsulta:
+
+Subconsulta with: selecciona la habitacion y busca la mejor opcion, donde la habitacion este activa, tenga la capacidad suficiente
+y que pertenezca al hotel seleccionado. Además obtiene el total de las reservas que tiene una habitacion
+
+Segunda seleccion: este select toma una habitacion valida desde la consulta with, y obtiene el costo de los adultos y niños, 
+para realizar los calculos en el codigo.
+
+*/
 
 CREATE PROCEDURE [dbo].[spObtenerCostosyHabitacion]
     @idHotel INT,
-    @personasTotal INT
+    @personasTotal INT,
+    @fechaEntrada date,
+    @fechaSalida date
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -232,6 +253,13 @@ BEGIN
         WHERE hb.idHotel = @idHotel
           AND hb.estado = 'A'
           AND hb.capacidadMaxima >= @personasTotal
+            AND NOT EXISTS ( --solo acepta la habitacion si no tiene reservaciones que choquen con las fechas nuevas
+                            SELECT 1
+                            FROM Reservacion r
+                              WHERE r.idHabitacion = hb.idHabitacion
+                              AND r.fechaEntrada <= @fechaSalida
+                              AND r.fechaSalida >= @fechaEntrada
+                            )
     )
     SELECT TOP 1
         h.costoPorCadaAdulto,
@@ -241,7 +269,7 @@ BEGIN
     FROM HabitacionesValidas hv
     INNER JOIN Hotel h ON h.idHotel = @idHotel
     WHERE h.idHotel = @idHotel
-    ORDER BY hv.TotalReservas ASC;  
+    ORDER BY hv.TotalReservas ASC; 
 END;
 GO
 
@@ -268,8 +296,6 @@ el ultimo id seria el de la habitacion que utiliza la comparacion entre el idhot
 despues valida las fechas para encontrar los dias (diferencias entre las fechas) por medio de el datediff, 
 y por ultmo el insert junto a un update para actualizar el estado de la habitación
 
-
-
 */
 
 CREATE PROCEDURE [dbo].[spCrearReservacion]
@@ -281,7 +307,7 @@ CREATE PROCEDURE [dbo].[spCrearReservacion]
  @numeroAdultos int,
  @costoPorCadaAdulto numeric(10,2),
  @costoPorCadaNinho numeric(10,2),
- @idEmpleado int
+ @idPersonaAccion int
 AS
 BEGIN
 
@@ -325,11 +351,7 @@ BEGIN
         'A'
     );
 
-    UPDATE Habitacion
-    SET estado = 'I'
-    WHERE idHabitacion = @idHabitacion;
-
-   DECLARE @idReservacion INT = SCOPE_IDENTITY();
+   DECLARE @idReservacion INT = SCOPE_IDENTITY(); --ultimo id que se acaba de insertar en una tabla en el porcedimiento
    
    INSERT INTO Bitacora(
         idReservacion,
@@ -339,7 +361,7 @@ BEGIN
     )
     Values( 
         @idReservacion,
-        @idEmpleado,
+        @idPersonaAccion,
         'CREADA',
          GETDATE());
 
@@ -347,20 +369,18 @@ END
 GO
 
 /* PROCEDIMIENTO QUE MUESTRA LOS CLIENTES EN EL DROPDOWNLIST
-->idPersona: el dato permite comparar el usuario de la sesion y la bd, y que este no muestre su nombre en el filtro
+->idEmpleado: el dato permite comparar el usuario de la sesion y la bd, y que este no muestre su nombre en el filtro
 
-Este procedimiento permite visualizar los datos del filtro por medio de la conexion
+Este procedimiento permite visualizar los datos del filtro por medio de la conexion bd
 */
-
-
 CREATE PROCEDURE [dbo].[spFiltroClientes]
-@idCliente int
+@idEmpleado int
 AS
 BEGIN
     Select p.idPersona,
            p.nombreCompleto
     from Persona p
-    Where  p.idPersona <> @idCliente and
+    Where  p.idPersona <> @idEmpleado and
            p.estado = 'A'
         Order by nombreCompleto ASC;
 END
@@ -373,9 +393,10 @@ GO
 -> fechaSalida: dato que permite encontrar datos segun la fecha seleccionada
 
 Este procedimiento permite encontrar y mostrar los datos en la tabla segun lo seleccionado en el filtro, 
-los cuales sus datos son los datos de entrada para funcionar segun el procedimiento*/
+este filtro encuentra reservaciones cuyos rangos se cruzan con el rango enviado.
 
-
+ejemplo: Reservación del 10 al 15 -> Filtro del 12 al 20
+*/
 CREATE PROCEDURE [dbo].[spFiltroReservaciones]
 @idCliente int,
 @fechaEntrada date,
@@ -404,11 +425,13 @@ GO
 
 ->idReservacion: Parametro de entrada para capturar la reservacion  a cancelar
 ->idEmpleado: Parametro de entrada para capturar el id del empleado y colocarlo en la bitacora
+
+
 */
 
 CREATE PROCEDURE [dbo].[spCancelarReservacion]
     @idReservacion INT,
-    @idEmpleado int
+    @idPersonaAccion int
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -425,6 +448,10 @@ BEGIN
     SET estado = 'I'
     WHERE idReservacion = @idReservacion;
 
+    UPDATE Reservacion
+    SET fechaModificacion = GETDATE()
+    WHERE idReservacion = @idReservacion;
+
     -- Liberar la habitación
     UPDATE Habitacion
     SET estado = 'A'
@@ -432,7 +459,7 @@ BEGIN
 
     -- Insertar en bitácora
     INSERT INTO Bitacora(idReservacion, idPersona, accionRealizada, fechaDeLaAccion)
-    VALUES(@idReservacion, @idEmpleado, 'CANCELADA', GETDATE());
+    VALUES(@idReservacion, @idPersonaAccion, 'CANCELADA', GETDATE());
 
 END
 GO
@@ -511,7 +538,7 @@ CREATE PROCEDURE [dbo].[spListarHabitaciones]
 	Select Ha.idHabitacion, Ho.Nombre, Ha.numeroHabitacion,Ha.capacidadMaxima,Ha.estado
 	from Habitacion Ha
 		inner join Hotel Ho on Ha.idHotel=Ho.idHotel
-	order by Ho.nombre,Ha.estado,Ha.numeroHabitacion
+	order by Ho.nombre,Ha.estado,Ha.numeroHabitacion asc;
  END
  GO
  
@@ -523,8 +550,7 @@ CREATE PROCEDURE [dbo].[spCrearHabitacion]
 	@idHotel INT,
     @numeroHabitacion VARCHAR(10),
     @capacidadMaxima INT,
-    @descripcion VARCHAR(500),
-    @estado VARCHAR(1)
+    @descripcion VARCHAR(500)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -533,7 +559,7 @@ BEGIN
     INSERT INTO [dbo].[Habitacion] 
         ([idHotel], [numeroHabitacion], [capacidadMaxima], [descripcion], [estado]) 
     VALUES 
-        (@idHotel, @numeroHabitacion, @capacidadMaxima, @descripcion, @estado);
+        (@idHotel, @numeroHabitacion, @capacidadMaxima, @descripcion, 'A');
 END
 GO
 
@@ -568,7 +594,8 @@ BEGIN
         Ho.nombre           AS Hotel,
         Ha.numeroHabitacion AS NumeroHabitacion,
         Ha.capacidadMaxima  AS CapacidadMaxima,
-        Ha.descripcion      AS Descripcion
+        Ha.descripcion      AS Descripcion,
+        ha.estado 
     FROM dbo.Habitacion Ha
     INNER JOIN dbo.Hotel Ho 
         ON Ha.idHotel = Ho.idHotel
@@ -614,4 +641,3 @@ BEGIN
     WHERE idHabitacion = @idHabitacion;
 END;
 GO
-

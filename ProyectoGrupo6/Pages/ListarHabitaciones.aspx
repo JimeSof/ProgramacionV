@@ -45,7 +45,7 @@
                         <%# Eval("estado").ToString() == "A"
                                 ? "<a href='EditarHabitacion.aspx?idHabitacion=" + Eval("idHabitacion") + "'>Modificar</a>"
                                 : (Eval("estado").ToString() == "I"
-                                    ? "<a href='HabitacionInactiva.aspx?idHabitacion=" + Eval("idHabitacion") + "'>Modificar</a>"
+                                    ? "<a href='Mensajes.aspx?idHabitacion=" + Eval("idHabitacion") + "'>Modificar</a>"
                                     : "Sin acción") %>
                     </ItemTemplate>
                 </asp:TemplateField>

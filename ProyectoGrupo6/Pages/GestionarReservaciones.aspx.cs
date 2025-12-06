@@ -23,7 +23,7 @@ namespace ProyectoGrupo6.Pages
                 {
                     Usuario usuario = (Usuario)Session["Usuario"];
 
-                    lblUsuario.Text = usuario.nombreCompleto;
+                    lblUsuario.Text = "Usuario: " + usuario.nombreCompleto;
 
                     bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
                     RedirigirSegunUsuario(esEmpleado);

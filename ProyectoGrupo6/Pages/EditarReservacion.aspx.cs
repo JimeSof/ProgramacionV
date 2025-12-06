@@ -26,13 +26,13 @@ namespace ProyectoGrupo6.Pages
 
                     CargarDatos(usuario, esEmpleado);
 
-                    
+
                 }
                 catch { }
 
             }
 
-                
+
         }
 
         private void CargarDatos(Usuario usuario, bool esEmpleado)
@@ -55,17 +55,19 @@ namespace ProyectoGrupo6.Pages
 
                 }
                 //verifica si el usuario es empleado o si la reservacion pertenece al usuario
-                if (!esEmpleado && data.IdPersona != usuario.idPersona )
+                if (!esEmpleado && data.IdPersona != usuario.idPersona)
                 {
                     Response.Redirect("MisReservaciones.aspx");
                     return;
                 }
 
+                //verifica si la reservacion esta inactiva o si la fecha de salida ya paso
                 if (data.Estado == 'I' || data.FechaSalida <= hoy)
                 {
                     RedirigirSegunUsuario(esEmpleado);
                     return;
-                }else if (data.FechaEntrada <= hoy && data.FechaSalida > hoy && esEmpleado == false)
+                }
+                else if (data.FechaEntrada <= hoy && data.FechaSalida > hoy && esEmpleado == false)
                 {
                     Response.Redirect("MisReservaciones.aspx");
                     return;
@@ -73,10 +75,11 @@ namespace ProyectoGrupo6.Pages
 
                 //llena los campos con los datos obtenidos 
                 hfnIdReservacion.Value = data.IdReservacion.ToString();
+                hfncapacidadMaxima.Value = data.CapacidadMaxima.ToString();
+
                 txtHotel.Text = data.Hotel;
                 txtNumeroHabitacion.Text = data.NumeroHabitacion;
                 txtCliente.Text = data.Cliente;
-
                 txtFechaEntrada.Text = data.FechaEntrada.ToString("yyyy-MM-dd");
                 txtFechaSalida.Text = data.FechaSalida.ToString("yyyy-MM-dd");
                 txtNumeroAdultos.Text = data.NumeroAdultos.ToString();
@@ -95,67 +98,33 @@ namespace ProyectoGrupo6.Pages
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         { //Permite guardar los cambios realizados en la reservacion usando un procedimiento almacenado
-            try
+            if (Page.IsValid)
             {
-                //LAS VALIDACIONES NO PUEDEN IR EN EL GUARDAR, DEBEN IR APARTE EN REQUIERIED FIELD VALIDATOR O CUSTOM VALIDATOR
-
-
-                if (string.IsNullOrWhiteSpace(txtFechaEntrada.Text) ||
-                    string.IsNullOrWhiteSpace(txtFechaSalida.Text) ||
-                    string.IsNullOrWhiteSpace(txtNumeroAdultos.Text) ||
-                    string.IsNullOrWhiteSpace(txtNumeroNinhos.Text))
+                try
                 {
-                    MostrarMensaje("Todos los campos son requeridos.");
-                    return;
+
+                    // Si llegamos aquí, todas las validaciones ya pasaron
+
+                    // Variables para guardar
+                    int idReserva = int.Parse(hfnIdReservacion.Value);
+                    DateTime entrada = DateTime.Parse(txtFechaEntrada.Text);
+                    DateTime salida = DateTime.Parse(txtFechaSalida.Text);
+                    int adultos = int.Parse(txtNumeroAdultos.Text);
+                    int ninhos = int.Parse(txtNumeroNinhos.Text);
+                    Usuario usuario = (Usuario)Session["Usuario"];
+
+                    using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
+                    {
+                        db.SpEditarReservacion(idReserva, entrada, salida, adultos, ninhos, usuario.idPersona.Value);
+                    }
+
+                    Session["Mensaje"] = "EditarReservacion";
+                    Response.Redirect("~/Pages/Mensajes.aspx");
                 }
-
-                DateTime entrada = DateTime.Parse(txtFechaEntrada.Text);
-                DateTime salida = DateTime.Parse(txtFechaSalida.Text);
-
-                if (entrada <= DateTime.Now || salida <= DateTime.Now)
+                catch
                 {
-                    MostrarMensaje("Las fechas deben ser posteriores a hoy.");
-                    return;
+                    MostrarMensaje("Error al guardar la reservación.");
                 }
-
-                if (salida <= entrada)
-                {
-                    MostrarMensaje("La fecha de salida debe ser mayor que la fecha de entrada.");
-                    return;
-                }
-
-                int adultos = int.Parse(txtNumeroAdultos.Text);
-                int ninhos = int.Parse(txtNumeroNinhos.Text);
-
-                if (adultos <= 0 || ninhos < 0)
-                {
-                    MostrarMensaje("Número de personas incorrecto.");
-                    return;
-                }
-
-                //HASTA AQUI LAS VALIDACIONS NO PUEDEN IR EN EL GUARDAR, DEBEN IR APARTE EN REQUIERIED FIELD VALIDATOR O CUSTOM VALIDATOR
-
-                //PON LAS VARIABLES AQUI PARA QUE NO HAYA PROBLEMAS AL MOMENTO DE GUARDAR
-
-                int idReserva = int.Parse(hfnIdReservacion.Value);
-
-                Usuario usuario = (Usuario)Session["Usuario"];
-
-                using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
-                {
-                   db.SpEditarReservacion(idReserva, entrada, salida, adultos, ninhos, usuario.idPersona.Value);
-                }
-
-                bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
-
-                if (esEmpleado)
-                    Response.Redirect("GestionarReservaciones.aspx");
-                else
-                    Response.Redirect("MisReservaciones.aspx");
-            }
-            catch
-            {
-                MostrarMensaje("Error al guardar la reservación.");
             }
         }
 
@@ -173,6 +142,85 @@ namespace ProyectoGrupo6.Pages
                 int id = int.Parse(Request.QueryString["idReservacion"]);
                 Response.Redirect("~/Pages/Detalle.aspx?idReservacion=" + id);
 
+            }
+            catch { }
+        }
+
+        // Métodos de validación para los CustomValidators
+
+        protected void cuvFechaEntrada_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
+        {
+            try
+            {
+                DateTime fechaEntrada;
+                if (DateTime.TryParse(args.Value, out fechaEntrada))
+                {
+                    args.IsValid = fechaEntrada > DateTime.Now;
+                }
+                else
+                {
+                    args.IsValid = false;
+                }
+            }
+            catch { }
+        }
+
+        protected void cuvFechaSalida_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
+        {
+            try
+            {
+                DateTime fechaSalida;
+                if (DateTime.TryParse(args.Value, out fechaSalida))
+                {
+                    args.IsValid = fechaSalida > DateTime.Now;
+                }
+                else
+                {
+                    args.IsValid = false;
+                }
+            }
+            catch { }
+
+        }
+
+        protected void cuvFechaSalidaMayor_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
+        {
+            try
+            {
+                DateTime fechaEntrada, fechaSalida;
+                if (DateTime.TryParse(txtFechaEntrada.Text, out fechaEntrada) &&
+                    DateTime.TryParse(args.Value, out fechaSalida))
+                {
+                    args.IsValid = fechaSalida >= fechaEntrada;
+                }
+                else
+                {
+                    args.IsValid = false;
+                }
+            }
+            catch { }
+        }
+
+        protected void cuvNumeroAdultosMaximo_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
+        {
+            try
+            {
+                int capacidadMaxima = Convert.ToInt32(hfncapacidadMaxima.Value);
+
+                int numAdultos = int.Parse(txtNumeroAdultos.Text);
+                int numNinhos = int.Parse(txtNumeroNinhos.Text);
+
+                int cantidadActual = numAdultos + numNinhos;
+
+                if (cantidadActual > capacidadMaxima)
+                {
+                    args.IsValid = false;
+                    cuvNumeroAdultosMaximo.ErrorMessage = "La cantidad de personas supera la capacidad máxima de esta habitación.";
+                }
+                else
+                {
+                    args.IsValid = true;
+                }
             }
             catch { }
         }

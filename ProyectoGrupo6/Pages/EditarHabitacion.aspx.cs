@@ -19,12 +19,32 @@ namespace ProyectoGrupo6.Pages
                     bool esEmpleado = Convert.ToBoolean(Session["esEmpleado"]);
                     RedirigirSegunUsuario(esEmpleado);
 
+
                     int idHabitacion = int.Parse(Request.QueryString["idHabitacion"]);
 
                     using (PvProyectoFinalDB db = new PvProyectoFinalDB("Database"))
                     {
                         var Habitacion = db.SpBuscarHabitacionById(idHabitacion).FirstOrDefault();
 
+                        bool hayReservacion = db.Reservacions.Any(r => r.IdHabitacion == idHabitacion &&
+                        r.Estado.ToString() == "A" &&  // A = en Proceso o en Espera
+                        r.FechaSalida > DateTime.Now       //la reservacion aún no ha terminada
+                        );
+
+                        //se valida que si tiene reservacion en espera o proceso no deje modifica
+                        if (hayReservacion)
+                        {
+                            Session["Mensaje"] = "hayReservacion";
+                            Response.Redirect("~/Pages/Mensajes.aspx");
+                            return;
+                        }
+                        //se valida que no esta inactiva en url
+                        if (Habitacion.IdHabitacion == idHabitacion && Habitacion.Estado.ToString() == "I")
+                        {
+                            Response.Redirect("~/Pages/Mensajes.aspx");
+                        }
+
+                        //habitacion es valida y existe, muestra los datos
                         if (Habitacion != null)
                         {
                             hdnIdHabitacion.Value = Habitacion.IdHabitacion.ToString();
@@ -37,7 +57,12 @@ namespace ProyectoGrupo6.Pages
                             txtDescripcion.Text = Habitacion.Descripcion;
                         }
 
+
+
+
                     }
+
+
                 }
 
                 catch
@@ -53,7 +78,9 @@ namespace ProyectoGrupo6.Pages
             //redirecciona segun el tipo de usuario
             if (!esEmpleado)
                 Response.Redirect("MisReservaciones.aspx");
+
         }
+
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
 
@@ -69,10 +96,11 @@ namespace ProyectoGrupo6.Pages
                 {
                     db.SpEditarHabitacion(idHabitacion, idHotel, numeroHabitacion, capacidadMaxima, descripcion);
                 }
-               
-                Response.Redirect("~/Pages/ListarHabitaciones.aspx");
+
+                Session["Mensaje"] = "EditarHabitacion";
+                Response.Redirect("~/Pages/Mensajes.aspx");
             }
-            catch{}
+            catch { }
 
         }
 
@@ -88,16 +116,16 @@ namespace ProyectoGrupo6.Pages
                 }
 
                 Session["Mensaje"] = "Inactivar";
-                Response.Redirect("~/Pages/HabitacionInactiva.aspx");
+                Response.Redirect("~/Pages/Mensajes.aspx");
             }
             catch { }
         }
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
-            try 
+            try
             {
-                
+
                 Response.Redirect("~/Pages/ListarHabitaciones.aspx");
             }
             catch { }
@@ -106,7 +134,7 @@ namespace ProyectoGrupo6.Pages
 
         protected void cuvHabitacion_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            try 
+            try
             {
                 //validacion que permite saber si existe una habitacion por medio de un procedimiento
                 string numeroHabitacion = txtHabitacion.Text;
@@ -126,7 +154,7 @@ namespace ProyectoGrupo6.Pages
                     }
                 }
             }
-            catch{}
+            catch { }
         }
     }
 }
